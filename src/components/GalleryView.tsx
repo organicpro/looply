@@ -26,7 +26,7 @@ export function GalleryView() {
   const [saved, setSaved] = useState(false);
 
   const filters = ['Todos', 'Mais vistos', 'UGC', 'POV', 'Review', 'Antes e Depois', 'Unboxing'];
-  const previewById: Record<string,string> = {v11:'/videos/v11-chaleira.mp4',v2:'/videos/v2-facas.mp4',v5:'/videos/v5-panelas.mp4',v6:'/videos/v6-parafusadeira.mp4',v10:'/videos/v10-copo-termico.mp4',v4:'/videos/v4-filtro-linha.mp4',v13:'/videos/v13-kit-ferramentas.mp4',v7:'/videos/v7-tiras-clareadoras.mp4',v12:'/videos/v12-massageador.mp4',v9:'/videos/v9-magnesio.mp4',v1:'/videos/v1-oculos.mp4',v8:'/videos/v1-oculos.mp4',v3:'/videos/v5-panelas.mp4'};
+  const previewById: Record<string,string> = {v11:'/videos/v11-chaleira.mp4',v2:'/videos/v2-facas.mp4',v5:'/videos/v5-panelas.mp4',v6:'/videos/v6-parafusadeira.mp4',v10:'/videos/v10-copo-termico.mp4',v4:'/videos/v4-filtro-linha.mp4',v13:'/videos/v13-kit-ferramentas.mp4',v7:'/videos/v7-tiras-clareadoras.mp4',v12:'/videos/v12-massageador.mp4',v9:'/videos/v9-magnesio.mp4',v1:'/videos/v1-oculos.mp4',v8:'/videos/v8-capa-celular.mp4',v3:'/videos/v5-panelas.mp4'};
 
   const filteredVideos = videos.filter(video => {
     const matchesSearch = video.productName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -99,7 +99,7 @@ export function GalleryView() {
 
       {/* Video Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredVideos.map((video, index) => (
+        {filteredVideos.map((video) => (
           <motion.div 
             key={video.id}
             variants={item}
@@ -111,7 +111,7 @@ export function GalleryView() {
           >
             <div className="aspect-[9/16] relative overflow-hidden m-3 rounded-[1.6rem] bg-slate-900/80 border border-white/10">
               {/* Autoplay video preview feed with active motion */}
-              <video src={previewById[video.id]} poster={video.thumbnail} className="w-full h-full object-cover" autoPlay={index < 4} muted loop playsInline preload="none" onMouseEnter={e => { if (index >= 4) e.currentTarget.play(); }} aria-label={`Preview de ${video.productName}`} />
+              <video src={previewById[video.id]} poster={video.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-label={`Preview de ${video.productName}`} />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/15 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
               
               <div className="absolute bottom-3 left-3 right-3 text-white z-10"><p className="font-bold text-xs leading-snug line-clamp-2">{video.productName}</p></div>
