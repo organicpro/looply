@@ -577,17 +577,13 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                 <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-8 items-start">
                   
                   {/* Left: 9:16 Vertical Phone Video Player Preview */}
-                  <div className="relative aspect-[9/16] w-full max-w-[340px] mx-auto rounded-[2.5rem] overflow-hidden bg-slate-950 border-4 border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.8)] group">
+                  <div className="generated-video-preview relative aspect-[9/16] w-full max-w-[340px] mx-auto rounded-[2.5rem] overflow-hidden bg-slate-950 border-4 border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.8)] group">
                     {/* Simulated video background */}
                     {isSpecialKettleMarble ? (
                       kettleMarbleVariant === 'white_marble' ? (
                         /* VIDEO 1: MÁRMORE BRANCO */
                         <div className="relative w-full h-full overflow-hidden bg-slate-900">
-                          <img 
-                            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&fit=crop" 
-                            alt="Bancada Mármore Branco" 
-                            className={`w-full h-full object-cover transition-transform duration-1000 ${isPlaying ? 'scale-105' : 'scale-100'}`}
-                          />
+                          <video src="/videos/marmore-1.mp4" className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label="Video de marmore 1" />
                           <div className="absolute inset-0 bg-black/20" />
                           
                           {/* Kettle foreground on white marble */}
@@ -619,11 +615,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                       ) : (
                         /* VIDEO 2: MÁRMORE VERDE */
                         <div className="relative w-full h-full overflow-hidden bg-slate-900">
-                          <img 
-                            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&fit=crop" 
-                            alt="Bancada Mármore Verde" 
-                            className={`w-full h-full object-cover transition-transform duration-1000 ${isPlaying ? 'scale-105' : 'scale-100'}`}
-                          />
+                          <video src="/videos/marmore-2.mp4" className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label="Video de marmore 2" />
                           <div className="absolute inset-0 bg-emerald-950/20" />
 
                           {/* Kettle foreground on green marble */}
@@ -657,11 +649,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                       kettleOfficeVariant === 'office_unboxing' ? (
                         /* VIDEO 1 ESCRITÓRIO: UNBOXING MESA DE MADEIRA */
                         <div className="relative w-full h-full overflow-hidden bg-amber-950">
-                          <img 
-                            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&fit=crop" 
-                            alt="Escritório Mesa de Madeira Unboxing" 
-                            className={`w-full h-full object-cover transition-transform duration-1000 ${isPlaying ? 'scale-105' : 'scale-100'}`}
-                          />
+                          <video src="/videos/escritorio-1.mp4" className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label="Video de escritorio 1" />
                           <div className="absolute inset-0 bg-black/30" />
 
                           {/* Box & Kettle overlay */}
@@ -693,11 +681,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                       ) : (
                         /* VIDEO 2 ESCRITÓRIO: ESCRITÓRIO MODERNO JANELA VISTA CIDADE */
                         <div className="relative w-full h-full overflow-hidden bg-slate-900">
-                          <img 
-                            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&fit=crop" 
-                            alt="Escritório Moderno Vista Cidade" 
-                            className={`w-full h-full object-cover transition-transform duration-1000 ${isPlaying ? 'scale-105' : 'scale-100'}`}
-                          />
+                          <video src="/videos/escritorio-2.mp4" className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label="Video de escritorio 2" />
                           <div className="absolute inset-0 bg-slate-950/30" />
 
                           {/* Kettle overlay */}
@@ -731,11 +715,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                       kettleGamerVariant === 'gamer_rgb' ? (
                         /* VIDEO 1 GAMER: SETUP GAMER RGB NEON DARK MESA PRETA */
                         <div className="relative w-full h-full overflow-hidden bg-slate-950">
-                          <img 
-                            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&fit=crop" 
-                            alt="Setup Gamer RGB Neon Dark" 
-                            className={`w-full h-full object-cover transition-transform duration-1000 ${isPlaying ? 'scale-105' : 'scale-100'}`}
-                          />
+                          <video src="/videos/setup-gamer.mp4" className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label="Video gamer" />
                           <div className="absolute inset-0 bg-gradient-to-t from-purple-950/60 via-black/40 to-cyan-950/40" />
 
                           {/* Gamer Keyboard & PC Case Glow background elements */}
@@ -771,11 +751,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                       ) : (
                         /* VIDEO 2 GAMER: SETUP STREAMER CYBERPUNK NEON */
                         <div className="relative w-full h-full overflow-hidden bg-slate-950">
-                          <img 
-                            src="https://images.unsplash.com/photo-1616588589676-63b3d98dcd3f?w=800&fit=crop" 
-                            alt="Setup Gamer Streamer Cyberpunk" 
-                            className={`w-full h-full object-cover transition-transform duration-1000 ${isPlaying ? 'scale-105' : 'scale-100'}`}
-                          />
+                          <video src="/videos/setup-gamer.mp4" className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label="Video gamer 2" />
                           <div className="absolute inset-0 bg-gradient-to-t from-pink-950/60 via-black/30 to-blue-950/40" />
 
                           {/* Kettle overlay */}

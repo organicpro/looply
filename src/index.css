@@ -209,3 +209,5 @@ body.light [class*="bg-black"] .text-white {
 /* Pure black canvas across the application */
 html, body, #root { background-color: #000000 !important; }
 body { background-image: none !important; }
+
+.generated-video-preview .absolute, .generated-video-preview > button { display:none !important; }
