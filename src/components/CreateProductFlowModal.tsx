@@ -860,7 +860,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
 
                     {/* SPECIAL SELECTOR SWITCHER FOR KETTLE VIDEOS (UM OU OUTRO) */}
                     {isSpecialKettleMarble && (
-                      <div className="bg-slate-900/90 border border-pink-500/30 p-4 rounded-2xl space-y-3 shadow-xl">
+                      <div className="hidden bg-slate-900/90 border border-pink-500/30 p-4 rounded-2xl space-y-3 shadow-xl">
                         <div className="flex items-center gap-2">
                           <Sparkles className="w-4 h-4 text-pink-400 shrink-0 animate-pulse" />
                           <div>
@@ -898,7 +898,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                     )}
 
                     {isSpecialKettleOffice && (
-                      <div className="bg-slate-900/90 border border-amber-500/30 p-4 rounded-2xl space-y-3 shadow-xl">
+                      <div className="hidden bg-slate-900/90 border border-amber-500/30 p-4 rounded-2xl space-y-3 shadow-xl">
                         <div className="flex items-center gap-2">
                           <Sparkles className="w-4 h-4 text-amber-400 shrink-0 animate-pulse" />
                           <div>
@@ -936,7 +936,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                     )}
 
                     {isSpecialKettleGamer && (
-                      <div className="bg-slate-900/90 border border-purple-500/30 p-4 rounded-2xl space-y-3 shadow-xl">
+                      <div className="hidden bg-slate-900/90 border border-purple-500/30 p-4 rounded-2xl space-y-3 shadow-xl">
                         <div className="flex items-center gap-2">
                           <Sparkles className="w-4 h-4 text-purple-400 shrink-0 animate-pulse" />
                           <div>
@@ -1075,26 +1075,6 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                           )}
                         </div>
                       </div>
-                    </div>
-
-                    {/* Script & Hashtags Preview */}
-                    <div className="bg-white/[0.03] border border-white/10 p-5 rounded-2xl space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Legenda & Hashtags Recomendadas:</span>
-                        <button 
-                          onClick={() => {
-                            navigator.clipboard.writeText(`Olha esse achado surpreendente no cenário ${activeScenarioObj.title}! 😱🔥 Garanta o seu no link do perfil. #viral #achadinhos #shopee #${selectedProduct?.name.replaceAll(' ', '')}`);
-                            setCopiedCaption(true);
-                            setTimeout(() => setCopiedCaption(false), 2000);
-                          }}
-                          className="text-xs text-pink-400 hover:text-white font-bold flex items-center gap-1.5"
-                        >
-                          <Copy className="w-3.5 h-3.5" /> {copiedCaption ? 'Copiado!' : 'Copiar Legenda'}
-                        </button>
-                      </div>
-                      <p className="text-xs text-slate-300 leading-relaxed font-mono bg-slate-950/60 p-3.5 rounded-xl border border-white/10">
-                        Olha esse achado surpreendente no cenário {activeScenarioObj.title}! 😱🔥 Garanta o seu no link do perfil. #viral #achadinhos #shopee #{selectedProduct?.name.replaceAll(' ', '')}
-                      </p>
                     </div>
 
                     {/* Bottom Reset & Close */}
