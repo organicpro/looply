@@ -99,7 +99,7 @@ export function GalleryView() {
 
       {/* Video Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredVideos.map((video) => (
+        {filteredVideos.map((video, index) => (
           <motion.div 
             key={video.id}
             variants={item}
@@ -111,48 +111,10 @@ export function GalleryView() {
           >
             <div className="aspect-[9/16] relative overflow-hidden m-3 rounded-[1.6rem] bg-slate-900/80 border border-white/10">
               {/* Autoplay video preview feed with active motion */}
-              <video src={previewById[video.id]} poster={video.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-label={`Preview de ${video.productName}`} />
+              <video src={previewById[video.id]} poster={video.thumbnail} className="w-full h-full object-cover" autoPlay={index < 4} muted loop playsInline preload="none" onMouseEnter={e => { if (index >= 4) e.currentTarget.play(); }} aria-label={`Preview de ${video.productName}`} />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/15 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
               
-              {/* Top Live Playing Badge & Views */}
-              <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                <div className="bg-slate-950/90 backdrop-blur-md rounded-full px-3 py-1.5 text-[10px] font-black text-white flex items-center gap-2 border border-rose-500/50 shadow-lg">
-                  <div className="flex items-center gap-0.5 h-3">
-                    <span className="w-0.5 bg-rose-500 rounded-full animate-eq-1" />
-                    <span className="w-0.5 bg-rose-400 rounded-full animate-eq-2" />
-                    <span className="w-0.5 bg-rose-500 rounded-full animate-eq-3" />
-                  </div>
-                  <span className="text-rose-400 font-mono tracking-wider text-[9px]">DIRETO EM PREVIEW</span>
-                </div>
-                <div className="bg-slate-950/90 backdrop-blur-md rounded-full px-2.5 py-1 text-[10px] font-extrabold text-white border border-white/20 shadow-md">
-                  {video.views}
-                </div>
-              </div>
-
-              {/* Continuous Video Progress Bar running directly in preview */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-pink-500 to-rose-500 animate-progress-loop shadow-[0_0_8px_#f43f5e]" />
-              </div>
-
-              {/* Bottom Info Overlay */}
-              <div className="absolute bottom-3 left-3 right-3 space-y-1.5 text-white z-10">
-                <p className="font-bold text-xs leading-snug line-clamp-2 tracking-tight drop-shadow-md group-hover:text-pink-200 transition-colors">
-                  {video.productName}
-                </p>
-                <div className="flex items-center justify-between text-[10px] font-medium text-slate-300 pt-1 border-t border-white/10">
-                  <span className="text-[9px] text-pink-300 font-bold flex items-center gap-1">
-                    <Volume2 className="w-3 h-3 text-pink-400 animate-pulse" /> Tocando Agora
-                  </span>
-                  <div className="flex items-center gap-2 font-semibold">
-                    <span className="flex items-center gap-1 text-slate-200">
-                      <Heart className="w-3 h-3 text-pink-500 fill-pink-500" /> {video.likes}
-                    </span>
-                    <span className="flex items-center gap-1 text-slate-200">
-                      <MessageSquare className="w-3 h-3 text-slate-300" /> {video.comments}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <div className="absolute bottom-3 left-3 right-3 text-white z-10"><p className="font-bold text-xs leading-snug line-clamp-2">{video.productName}</p></div>
             </div>
           </motion.div>
         ))}
