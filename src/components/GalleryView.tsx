@@ -61,7 +61,7 @@ export function GalleryView() {
             <span>Criativos de Alta Conversão</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white drop-shadow-sm">
-            Biblioteca de Vídeos Virais ({videos.length})
+            Biblioteca de Videos Virais
           </h1>
           <p className="text-slate-400 text-sm">
             Exemplos reais e virais dos produtos mais lucrativos no TikTok Shop & Shopee.
