@@ -65,20 +65,20 @@ interface CustomMetrics {
 }
 
 const DEFAULT_METRICS: CustomMetrics = {
-  hojeGmv: 1840,
-  d7Gmv: 14850,
-  d30Gmv: 68400,
-  hojeHoras: '6h 15m',
-  d7Horas: '42h 30m',
-  d30Horas: '184h 20m',
-  hojeViewers: 480,
-  d7Viewers: 2150,
-  d30Viewers: 8420,
-  hojePedidos: 42,
-  d7Pedidos: 338,
-  d30Pedidos: 1540,
-  canalOfficialGmv: 1120,
-  canalBeautyGmv: 720
+  hojeGmv: 0,
+  d7Gmv: 0,
+  d30Gmv: 0,
+  hojeHoras: '0h 0m',
+  d7Horas: '0h 0m',
+  d30Horas: '0h 0m',
+  hojeViewers: 0,
+  d7Viewers: 0,
+  d30Viewers: 0,
+  hojePedidos: 0,
+  d7Pedidos: 0,
+  d30Pedidos: 0,
+  canalOfficialGmv: 0,
+  canalBeautyGmv: 0
 };
 
 export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) {
@@ -89,6 +89,10 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
 
   const [metrics, setMetrics] = useState<CustomMetrics>(() => {
     try {
+      if (localStorage.getItem('yviral_metrics_reset_v1') !== 'true') {
+        localStorage.removeItem('yviral_custom_metrics');
+        localStorage.setItem('yviral_metrics_reset_v1', 'true');
+      }
       const saved = localStorage.getItem('yviral_custom_metrics');
       return saved ? JSON.parse(saved) : DEFAULT_METRICS;
     } catch {
