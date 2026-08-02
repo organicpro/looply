@@ -52,7 +52,7 @@ export function GalleryView() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="max-w-[1400px] mx-auto py-10 px-6 md:px-10 space-y-8"
+      className="gallery-view max-w-[1400px] mx-auto py-10 px-6 md:px-10 space-y-8"
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
@@ -103,7 +103,7 @@ export function GalleryView() {
           <motion.div 
             key={video.id}
             variants={item}
-            className="glass-panel glass-panel-hover rounded-[2rem] overflow-hidden group cursor-pointer hover:shadow-[0_0_35px_rgba(244,63,94,0.3)] hover:border-pink-500/50 transition-all duration-300"
+            className="video-card glass-panel glass-panel-hover rounded-[2rem] overflow-hidden group cursor-pointer hover:shadow-[0_0_35px_rgba(244,63,94,0.3)] hover:border-pink-500/50 transition-all duration-300"
             onClick={() => {
               setSelectedVideo(video);
               setIsPlaying(true);

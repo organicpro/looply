@@ -34,7 +34,7 @@ export function RadarView({ onSelectProduct }: { onSelectProduct: (p: Product) =
         variants={container}
         initial="hidden"
         animate="show"
-        className="max-w-7xl mx-auto py-12 px-8 space-y-10"
+        className="products-view max-w-7xl mx-auto py-12 px-8 space-y-10"
       >
         {/* Header Tabs & "criar produto novo" Button */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.02] p-4 rounded-[2rem] border border-white/10 backdrop-blur-2xl shadow-xl">
@@ -62,7 +62,7 @@ export function RadarView({ onSelectProduct }: { onSelectProduct: (p: Product) =
             <motion.div 
               key={product.id}
               variants={item}
-              className="glass-panel glass-panel-hover rounded-[2.2rem] overflow-hidden group cursor-pointer flex flex-col h-full hover:shadow-[0_0_35px_rgba(244,63,94,0.25)] hover:border-pink-500/40"
+              className="product-card glass-panel glass-panel-hover rounded-[2.2rem] overflow-hidden group cursor-pointer flex flex-col h-full hover:shadow-[0_0_35px_rgba(244,63,94,0.25)] hover:border-pink-500/40"
               onClick={() => onSelectProduct(product)}
             >
               {/* Image Container */}

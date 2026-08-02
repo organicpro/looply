@@ -76,7 +76,7 @@ export default function App() {
   if (!user) return <LoginView onLogin={(name, photo) => { localStorage.setItem('looply_user_name', name); if (photo) localStorage.setItem('looply_profile_avatar', photo); setUser(name); }} />;
 
   return (
-    <div className="flex flex-col min-h-screen bg-background selection:bg-purple-primary/30 selection:text-white transition-colors duration-300">
+    <div className="looply-shell flex flex-col min-h-screen bg-background selection:bg-purple-primary/30 selection:text-white transition-colors duration-300">
       <Sidebar 
         activeTab={activeTab} 
         setActiveTab={(tab) => {
@@ -87,7 +87,7 @@ export default function App() {
         onToggleTheme={toggleTheme}
       />
       
-      <main className="flex-1 relative overflow-y-auto">
+      <main className="looply-main flex-1 relative overflow-y-auto">
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedProduct ? `product-${selectedProduct.id}` : activeTab}
@@ -95,7 +95,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="w-full"
+            className="looply-view w-full"
           >
             {renderView()}
           </motion.div>

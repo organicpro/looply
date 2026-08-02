@@ -233,10 +233,10 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
       variants={container}
       initial="hidden"
       animate="show"
-      className="max-w-[1500px] mx-auto py-8 px-4 sm:px-6 md:px-10 space-y-8 relative"
+      className="dashboard-view max-w-[1500px] mx-auto py-8 px-4 sm:px-6 md:px-10 space-y-8 relative"
     >
       {/* Header with Title & Date Range Toggle */}
-      <motion.div variants={item} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+      <motion.div variants={item} className="dashboard-hero flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl sm:text-3xl font-display font-black text-white tracking-tight">
@@ -284,9 +284,9 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
       </motion.div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="dashboard-kpi-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* KPI 1: Faturamento GMV Total */}
-        <motion.div variants={item} className="glass-panel rounded-[2rem] p-6 relative overflow-hidden group hover:border-pink-500/40 transition-all shadow-lg">
+        <motion.div variants={item} className="kpi-card kpi-card--rose glass-panel rounded-[2rem] p-6 relative overflow-hidden group transition-all shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 shadow-inner">
               <DollarSign className="w-5 h-5" />
@@ -307,7 +307,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
         </motion.div>
 
         {/* KPI 2: Horas Transmitidas */}
-        <motion.div variants={item} className="glass-panel rounded-[2rem] p-6 relative overflow-hidden group hover:border-cyan-500/40 transition-all shadow-lg">
+        <motion.div variants={item} className="kpi-card kpi-card--blush glass-panel rounded-[2rem] p-6 relative overflow-hidden group transition-all shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-inner">
               <Tv className="w-5 h-5" />
@@ -328,7 +328,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
         </motion.div>
 
         {/* KPI 3: Espectadores */}
-        <motion.div variants={item} className="glass-panel rounded-[2rem] p-6 relative overflow-hidden group hover:border-amber-500/40 transition-all shadow-lg">
+        <motion.div variants={item} className="kpi-card kpi-card--coral glass-panel rounded-[2rem] p-6 relative overflow-hidden group transition-all shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-inner">
               <Users className="w-5 h-5" />
@@ -349,7 +349,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
         </motion.div>
 
         {/* KPI 4: Pedidos */}
-        <motion.div variants={item} className="glass-panel rounded-[2rem] p-6 relative overflow-hidden group hover:border-emerald-500/40 transition-all shadow-lg">
+        <motion.div variants={item} className="kpi-card kpi-card--emerald glass-panel rounded-[2rem] p-6 relative overflow-hidden group transition-all shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-inner">
               <ShoppingBag className="w-5 h-5" />
@@ -373,7 +373,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
       {/* Main Charts Row */}
       <div className="grid grid-cols-12 gap-8">
         {/* Left Chart: Desempenho de GMV */}
-        <motion.div variants={item} className="col-span-12 lg:col-span-8 glass-panel rounded-[2.5rem] p-6 sm:p-8 space-y-6 relative overflow-hidden">
+        <motion.div variants={item} className="analytics-panel col-span-12 lg:col-span-8 glass-panel rounded-[2.5rem] p-6 sm:p-8 space-y-6 relative overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
@@ -434,7 +434,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
         </motion.div>
 
         {/* Right Chart: Origem do Faturamento */}
-        <motion.div variants={item} className="col-span-12 lg:col-span-4 glass-panel rounded-[2.5rem] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+        <motion.div variants={item} className="analytics-panel col-span-12 lg:col-span-4 glass-panel rounded-[2.5rem] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
           <div>
             <h3 className="font-display font-bold text-xl text-white">Fontes de Receita</h3>
             <p className="text-xs text-slate-400 mt-1">Origem do faturamento dentro do ecossistema TikTok.</p>
@@ -489,7 +489,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
       </div>
 
       {/* Live Channels Stream Status Table */}
-      <motion.div variants={item} className="glass-panel rounded-[2.5rem] p-6 sm:p-8 space-y-6 relative overflow-hidden">
+      <motion.div variants={item} className="live-panel glass-panel rounded-[2.5rem] p-6 sm:p-8 space-y-6 relative overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-3">

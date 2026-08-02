@@ -32,7 +32,7 @@ export function Sidebar({ activeTab, setActiveTab, theme = 'dark', onToggleTheme
   ];
 
   return (
-    <header className="w-full h-16 border-b border-white/10 flex items-center justify-between sticky top-0 bg-slate-950/80 backdrop-blur-2xl px-6 z-50 shadow-lg relative">
+    <header className="looply-header w-full h-16 border-b border-white/10 flex items-center justify-between sticky top-0 bg-slate-950/80 backdrop-blur-2xl px-6 z-50 shadow-lg relative">
       {/* LEFT: Logo & Brand Mark */}
       <div className="flex items-center gap-4 z-10">
         <div onClick={() => setActiveTab('home')} className="cursor-pointer group flex items-center gap-2">
@@ -42,7 +42,7 @@ export function Sidebar({ activeTab, setActiveTab, theme = 'dark', onToggleTheme
 
       {/* CENTER: Main Floating Navigation Menu */}
       <div className="absolute left-1/2 -translate-x-1/2 flex items-center">
-        <nav className="flex items-center bg-white/[0.05] dark:bg-white/[0.04] backdrop-blur-2xl p-1 rounded-full border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+        <nav className="looply-primary-nav flex items-center bg-white/[0.05] dark:bg-white/[0.04] backdrop-blur-2xl p-1 rounded-full border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -68,7 +68,7 @@ export function Sidebar({ activeTab, setActiveTab, theme = 'dark', onToggleTheme
       {/* RIGHT: Actions, Search, Theme Toggle & Profile */}
       <div className="flex items-center gap-3 z-10">
         {/* Search input box */}
-        <div className="relative hidden md:block group">
+        <div className="looply-search relative hidden md:block group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 group-focus-within:text-pink-400 transition-colors" />
           <input 
             type="text" 
