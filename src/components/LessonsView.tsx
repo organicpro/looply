@@ -36,7 +36,7 @@ export function LessonsView() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-64px)] overflow-hidden bg-[#08090d] text-slate-100">
+    <div className="flex h-[calc(100vh-64px)] overflow-hidden bg-[#080006] text-slate-100">
       {/* Curriculum Sidebar */}
       <motion.aside 
         initial={false}

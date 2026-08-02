@@ -187,8 +187,8 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
 
   const pieData = [
     { name: 'TikTok Live Stream', value: Math.round(currentTotalGmv * 0.68), color: '#f43f5e' },
-    { name: 'TikTok Shop Vitrine', value: Math.round(currentTotalGmv * 0.22), color: '#00f2fe' },
-    { name: 'Vídeos Virais (Feed)', value: Math.round(currentTotalGmv * 0.10), color: '#f59e0b' },
+    { name: 'TikTok Shop Vitrine', value: Math.round(currentTotalGmv * 0.22), color: '#ff73aa' },
+    { name: 'Vídeos Virais (Feed)', value: Math.round(currentTotalGmv * 0.10), color: '#9f174f' },
   ];
 
   // Active live channels table data
@@ -406,8 +406,8 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
                     <stop offset="95%" stopColor="#f43f5e" stopOpacity={0}/>
                   </linearGradient>
                   <linearGradient id="horasGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#00f2fe" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#00f2fe" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="#ff73aa" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#ff73aa" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="time" stroke="#64748b" fontSize={11} tickLine={false} />
@@ -427,7 +427,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
                   ]}
                 />
                 <Area type="monotone" dataKey="gmv" stroke="#f43f5e" strokeWidth={3} fillOpacity={1} fill="url(#gmvGradient)" />
-                <Area type="monotone" dataKey="horas" stroke="#00f2fe" strokeWidth={2} fillOpacity={1} fill="url(#horasGradient)" />
+                <Area type="monotone" dataKey="horas" stroke="#ff73aa" strokeWidth={2} fillOpacity={1} fill="url(#horasGradient)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>

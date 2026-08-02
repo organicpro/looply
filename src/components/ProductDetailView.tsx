@@ -143,7 +143,7 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
   };
 
   return (
-    <div className="min-h-screen bg-[#030712] text-[#f1f5f9] font-sans antialiased pb-20 selection:bg-pink-500/30 selection:text-white relative overflow-hidden">
+    <div className="min-h-screen bg-[#080006] text-[#f1f5f9] font-sans antialiased pb-20 selection:bg-pink-500/30 selection:text-white relative overflow-hidden">
       {/* Dynamic Glass Mesh Orbs */}
       <div className="absolute top-[-10%] left-[-10%] w-[650px] h-[650px] bg-pink-600/10 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
@@ -188,7 +188,7 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
             <div className="glass-panel rounded-[2.2rem] p-8 space-y-5 shadow-xl relative overflow-hidden group">
               <div className="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all duration-700" />
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-[#38bdf8] uppercase tracking-[0.2em] drop-shadow-sm">Recomendação Estratégica</span>
+                <span className="text-[10px] font-bold text-[#ff73aa] uppercase tracking-[0.2em] drop-shadow-sm">Recomendação Estratégica</span>
                 <div className="w-2.5 h-2.5 bg-blue-400 rounded-full animate-pulse shadow-[0_0_15px_rgba(56,189,248,0.8)]" />
               </div>
               <p className="text-[15px] font-medium text-slate-200 leading-relaxed italic opacity-95">

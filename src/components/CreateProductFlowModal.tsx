@@ -217,7 +217,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
         className="glass-panel w-full max-w-5xl rounded-[2.8rem] overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-white/20 my-auto relative"
       >
         {/* Glow Accent Header line with Cyan & Pink Chromatic Aberration */}
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#00f2fe] via-pink-500 to-[#ff007f] shadow-[0_0_20px_rgba(0,242,254,0.8)]" />
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#ff73aa] via-pink-500 to-[#ff007f] shadow-[0_0_20px_rgba(255,45,122,0.65)]" />
 
         {/* Modal Header */}
         <div className="p-6 md:p-8 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
@@ -225,7 +225,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
             <Logo size={42} showText={false} />
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold text-cyan-300 uppercase tracking-widest bg-gradient-to-r from-[#00f2fe]/20 to-[#ff0055]/20 border border-cyan-400/30 px-2.5 py-0.5 rounded-full">
+                <span className="text-[10px] font-bold text-cyan-300 uppercase tracking-widest bg-gradient-to-r from-[#ff73aa]/20 to-[#ff0055]/20 border border-cyan-400/30 px-2.5 py-0.5 rounded-full">
                   Gerador IA de Vídeos
                 </span>
                 <span className="text-xs text-slate-400 font-semibold">Etapa {step} de 3</span>
@@ -334,7 +334,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                       onClick={() => setSelectedProduct(prod)}
                       className={`relative rounded-[2rem] overflow-hidden cursor-pointer transition-all duration-300 flex flex-col group ${
                         isSelected 
-                          ? 'bg-gradient-to-b from-pink-500/20 to-slate-900/90 border-2 border-pink-500 shadow-[0_0_25px_rgba(244,63,94,0.35)] scale-[1.02]' 
+                          ? 'bg-gradient-to-b from-pink-500/20 to-slate-900/90 border-2 border-pink-500 shadow-[0_0_25px_rgba(244,63,94,0.35)] scale-[1.02]'
                           : 'glass-panel glass-panel-hover border border-white/10 hover:border-white/20'
                       }`}
                     >
@@ -874,7 +874,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                             onClick={() => setKettleMarbleVariant('white_marble')}
                             className={`p-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 border ${
                               kettleMarbleVariant === 'white_marble' 
-                                ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white border-white/40 shadow-[0_0_15px_rgba(244,63,94,0.4)] scale-[1.02]' 
+                                ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white border-white/40 shadow-[0_0_15px_rgba(244,63,94,0.4)] scale-[1.02]'
                                 : 'bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10'
                             }`}
                           >
@@ -886,7 +886,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                             onClick={() => setKettleMarbleVariant('green_marble')}
                             className={`p-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 border ${
                               kettleMarbleVariant === 'green_marble' 
-                                ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white border-white/40 shadow-[0_0_15px_rgba(244,63,94,0.4)] scale-[1.02]' 
+                                ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white border-white/40 shadow-[0_0_15px_rgba(244,63,94,0.4)] scale-[1.02]'
                                 : 'bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10'
                             }`}
                           >
@@ -912,7 +912,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                             onClick={() => setKettleOfficeVariant('office_unboxing')}
                             className={`p-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 border ${
                               kettleOfficeVariant === 'office_unboxing' 
-                                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white border-white/40 shadow-[0_0_15px_rgba(245,158,11,0.4)] scale-[1.02]' 
+                                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white border-white/40 shadow-[0_0_15px_rgba(245,158,11,0.4)] scale-[1.02]'
                                 : 'bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10'
                             }`}
                           >
@@ -924,7 +924,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                             onClick={() => setKettleOfficeVariant('office_modern')}
                             className={`p-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 border ${
                               kettleOfficeVariant === 'office_modern' 
-                                ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-white/40 shadow-[0_0_15px_rgba(6,182,212,0.4)] scale-[1.02]' 
+                                ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-white/40 shadow-[0_0_15px_rgba(6,182,212,0.4)] scale-[1.02]'
                                 : 'bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10'
                             }`}
                           >
@@ -950,7 +950,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                             onClick={() => setKettleGamerVariant('gamer_rgb')}
                             className={`p-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 border ${
                               kettleGamerVariant === 'gamer_rgb' 
-                                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-white/40 shadow-[0_0_15px_rgba(168,85,247,0.4)] scale-[1.02]' 
+                                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-white/40 shadow-[0_0_15px_rgba(168,85,247,0.4)] scale-[1.02]'
                                 : 'bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10'
                             }`}
                           >
@@ -962,7 +962,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                             onClick={() => setKettleGamerVariant('gamer_cyberpunk')}
                             className={`p-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 border ${
                               kettleGamerVariant === 'gamer_cyberpunk' 
-                                ? 'bg-gradient-to-r from-pink-500 to-cyan-500 text-white border-white/40 shadow-[0_0_15px_rgba(6,182,212,0.4)] scale-[1.02]' 
+                                ? 'bg-gradient-to-r from-pink-500 to-rose-700 text-white border-white/40 shadow-[0_0_15px_rgba(6,182,212,0.4)] scale-[1.02]'
                                 : 'bg-white/5 text-slate-300 hover:text-white border-white/10 hover:bg-white/10'
                             }`}
                           >

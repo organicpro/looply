@@ -61,7 +61,7 @@ export function GalleryView() {
             <span>Criativos de Alta Conversão</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white drop-shadow-sm">
-            Biblioteca de Videos Virais
+            Biblioteca de Vídeos Virais
           </h1>
           <p className="text-slate-400 text-sm">
             Exemplos reais e virais dos produtos mais lucrativos no TikTok Shop & Shopee.
@@ -144,7 +144,7 @@ export function GalleryView() {
             >
               {/* Left Column: Simulated Vertical Video Player */}
               <div className="md:w-[400px] h-[450px] md:h-auto bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center group shrink-0 border-r border-white/10">
-                <video src={previewById[selectedVideo.id]} poster={selectedVideo.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label={`V?deo de ${selectedVideo.productName}`} />
+                <video src={previewById[selectedVideo.id]} poster={selectedVideo.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label={`Vídeo de ${selectedVideo.productName}`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/40" />
 
                 {/* Back Button */}
