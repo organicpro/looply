@@ -26,6 +26,7 @@ export function GalleryView() {
   const [saved, setSaved] = useState(false);
 
   const filters = ['Todos', 'Mais vistos', 'UGC', 'POV', 'Review', 'Antes e Depois', 'Unboxing'];
+  const previewById: Record<string,string> = {v11:'/videos/v11-chaleira.mp4',v2:'/videos/v2-facas.mp4',v5:'/videos/v5-panelas.mp4',v6:'/videos/v6-parafusadeira.mp4',v10:'/videos/v10-copo-termico.mp4',v4:'/videos/v4-filtro-linha.mp4',v13:'/videos/v13-kit-ferramentas.mp4',v7:'/videos/v7-tiras-clareadoras.mp4',v12:'/videos/v12-massageador.mp4',v9:'/videos/v9-magnesio.mp4',v1:'/videos/v1-oculos.mp4'};
 
   const filteredVideos = videos.filter(video => {
     const matchesSearch = video.productName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -110,12 +111,7 @@ export function GalleryView() {
           >
             <div className="aspect-[9/16] relative overflow-hidden m-3 rounded-[1.6rem] bg-slate-900/80 border border-white/10">
               {/* Autoplay video preview feed with active motion */}
-              <img 
-                src={video.thumbnail} 
-                alt={video.productName}
-                className="w-full h-full object-cover animate-video-live"
-                referrerPolicy="no-referrer"
-              />
+              <video src={previewById[video.id]} poster={video.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-label={`Preview de ${video.productName}`} />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/15 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
               
               {/* Top Live Playing Badge & Views */}
@@ -186,11 +182,7 @@ export function GalleryView() {
             >
               {/* Left Column: Simulated Vertical Video Player */}
               <div className="md:w-[400px] h-[450px] md:h-auto bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center group shrink-0 border-r border-white/10">
-                <img 
-                  src={selectedVideo.thumbnail} 
-                  alt={selectedVideo.productName}
-                  className={`w-full h-full object-cover transition-transform duration-1000 ${isPlaying ? 'scale-105' : 'scale-100'}`}
-                />
+                <video src={previewById[selectedVideo.id]} poster={selectedVideo.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label={`V?deo de ${selectedVideo.productName}`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/40" />
 
                 {/* Back Button */}
