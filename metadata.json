@@ -1,0 +1,8 @@
+{
+  "name": "Tiktok - Stream",
+  "description": "AI-powered affiliate product research and video analysis platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
