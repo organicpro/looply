@@ -83,7 +83,7 @@ export function Sidebar({ activeTab, setActiveTab, theme = 'dark', onToggleTheme
         {/* Download App button */}
         <button className="hidden sm:flex px-4 py-1.5 bg-gradient-to-r from-pink-500/80 to-rose-500/80 hover:from-pink-500 hover:to-rose-500 text-white rounded-full text-xs font-bold items-center gap-2 transition-all shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-white/20 active:scale-95">
           <Download className="w-3.5 h-3.5" />
-          <span>Baixar App</span>
+          <span>Baixar Extens?o</span>
         </button>
 
         {/* Language selector */}
