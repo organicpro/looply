@@ -26,7 +26,7 @@ export function GalleryView() {
   const [saved, setSaved] = useState(false);
 
   const filters = ['Todos', 'Mais vistos', 'UGC', 'POV', 'Review', 'Antes e Depois', 'Unboxing'];
-  const previewById: Record<string,string> = {v11:'/videos/v11-chaleira.mp4',v2:'/videos/v2-facas.mp4',v5:'/videos/v5-panelas.mp4',v6:'/videos/v6-parafusadeira.mp4',v10:'/videos/v10-copo-termico.mp4',v4:'/videos/v4-filtro-linha.mp4',v13:'/videos/v13-kit-ferramentas.mp4',v7:'/videos/v7-tiras-clareadoras.mp4',v12:'/videos/v12-massageador.mp4',v9:'/videos/v9-magnesio.mp4',v1:'/videos/v1-oculos.mp4'};
+  const previewById: Record<string,string> = {v11:'/videos/v11-chaleira.mp4',v2:'/videos/v2-facas.mp4',v5:'/videos/v5-panelas.mp4',v6:'/videos/v6-parafusadeira.mp4',v10:'/videos/v10-copo-termico.mp4',v4:'/videos/v4-filtro-linha.mp4',v13:'/videos/v13-kit-ferramentas.mp4',v7:'/videos/v7-tiras-clareadoras.mp4',v12:'/videos/v12-massageador.mp4',v9:'/videos/v9-magnesio.mp4',v1:'/videos/v1-oculos.mp4',v8:'/videos/v1-oculos.mp4',v3:'/videos/v5-panelas.mp4'};
 
   const filteredVideos = videos.filter(video => {
     const matchesSearch = video.productName.toLowerCase().includes(searchQuery.toLowerCase()) ||
