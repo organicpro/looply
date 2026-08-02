@@ -1024,7 +1024,7 @@ export function CreateProductFlowModal({ isOpen, onClose }: CreateProductFlowMod
                         {/* BOTÃO 2: ESTENDER VÍDEO (As explicitly requested by user) */}
                         <div className="relative">
                           <button
-                            onClick={() => setExtendOptionsOpen(!extendOptionsOpen)}
+                            onClick={() => window.open('https://heroextendr.up.railway.app/', '_blank', 'noopener,noreferrer')}
                             disabled={isExtending}
                             className="w-full py-4 px-6 rounded-2xl font-bold text-sm md:text-base glass-button text-white flex items-center justify-center gap-3 transition-all active:scale-95 border border-pink-400/40 hover:bg-pink-500/20 shadow-md"
                           >
