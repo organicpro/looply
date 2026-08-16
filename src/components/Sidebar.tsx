@@ -7,6 +7,7 @@ import {
   Search,
   Users,
   Download,
+  Radio,
   ChevronDown
 } from 'lucide-react';
 import { Logo } from './Logo';
@@ -24,6 +25,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
     { id: 'home', label: 'Explorar', icon: Home },
     { id: 'radar', label: 'Produtos', icon: Radar },
     { id: 'gallery', label: 'Vídeos', icon: MonitorPlay },
+    { id: 'live-builder', label: 'Montar Live', icon: Radio },
     { id: 'lessons', label: 'Academy', icon: GraduationCap },
   ];
 

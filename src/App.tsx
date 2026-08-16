@@ -13,6 +13,7 @@ import { ProductDetailView } from './components/ProductDetailView';
 import { Product } from './types';
 import { LoginView } from './components/LoginView';
 import { ProfileView } from './components/ProfileView';
+import { LiveBuilderView } from './components/LiveBuilderView';
 import { AnimatePresence, motion } from 'motion/react';
 
 export default function App() {
@@ -45,6 +46,8 @@ export default function App() {
         return <RadarView onSelectProduct={(p) => setSelectedProduct(p)} />;
       case 'gallery':
         return <GalleryView />;
+      case 'live-builder':
+        return <LiveBuilderView />;
       case 'lessons':
         return <LessonsView />;
       case 'profile':

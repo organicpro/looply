@@ -16,6 +16,15 @@ interface ShopeeProductSeed {
 
 const catalog: ShopeeProductSeed[] = [
   {
+    id: 'shopee-chaleira-inox',
+    name: 'Chaleira Elétrica Inox com Desligamento Automático',
+    category: 'Cozinha',
+    image: '/chaleira-eletrica-inox.webp',
+    price: 'Ver na Shopee', sales: 'Novo', commission: 'A consultar', score: 97, growth: 'Em destaque',
+    affiliateLink: 'https://shopee.com.br/product/1404131634/58257750273',
+    recommendation: 'Demonstre a rapidez para ferver água, o corpo em aço inox, a base elétrica e o desligamento automático. Mostre o uso no preparo de café e chá.'
+  },
+  {
     id: 'shopee-01',
     name: 'Jaqueta Jogger Masculina com Capuz e Detalhe Refletivo',
     category: 'Moda Masculina',

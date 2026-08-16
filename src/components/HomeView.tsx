@@ -1,4 +1,4 @@
-import { ExternalLink, PackageCheck, Play, Search, Video } from 'lucide-react';
+import { ExternalLink, PackageCheck, Play, Radio, Search, Video } from 'lucide-react';
 import { motion } from 'motion/react';
 import { shopeeProducts as products } from '../shopeeProducts';
 
@@ -16,8 +16,8 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
             <h1 className="mt-5 max-w-3xl text-3xl sm:text-5xl font-display font-black leading-[1.05] tracking-tight text-white">Encontre o produto certo.<br/><span className="bg-gradient-to-r from-orange-300 via-amber-400 to-orange-400 bg-clip-text text-transparent">Crie antes da concorrência.</span></h1>
             <p className="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-slate-300">Uma central de inteligência para descobrir produtos, analisar demanda, estimar comissões e transformar oportunidades da Shopee em vídeos que vendem.</p>
             <div className="mt-7 flex flex-col sm:flex-row gap-3">
-              <button onClick={() => onNavigate('radar')} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 px-6 py-3.5 text-sm font-black text-white shadow-[0_14px_34px_rgba(249,115,22,0.24)] transition hover:-translate-y-0.5"><Search className="h-4 w-4" /> Explorar produtos</button>
-              <button onClick={() => onNavigate('gallery')} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.045] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-white/[0.08]"><Play className="h-4 w-4 text-orange-400" /> Ver vídeos prontos</button>
+              <button onClick={() => onNavigate('live-builder')} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 px-6 py-3.5 text-sm font-black text-white shadow-[0_14px_34px_rgba(249,115,22,0.24)] transition hover:-translate-y-0.5"><Radio className="h-4 w-4" /> Montar minha live</button>
+              <button onClick={() => onNavigate('radar')} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.045] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-white/[0.08]"><Search className="h-4 w-4 text-orange-400" /> Explorar produtos</button>
             </div>
           </div>
           <div className="dashboard-product-mosaic grid grid-cols-2 gap-3">
