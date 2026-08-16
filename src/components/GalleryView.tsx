@@ -2,7 +2,7 @@ import { Search, Heart, MessageSquare, ExternalLink, Copy, Bookmark, Play, Check
 import { motion, AnimatePresence } from 'motion/react';
 import { videos } from '../data';
 import { Video } from '../types';
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const container = {
   hidden: { opacity: 0 },
@@ -17,6 +17,90 @@ const item = {
   show: { opacity: 1, y: 0 }
 };
 
+const previewById: Record<string, string> = {
+  v11: '/videos/v11-chaleira.mp4',
+  v2: '/videos/v2-facas.mp4',
+  v5: '/videos/v5-panelas.mp4',
+  v6: '/videos/v6-parafusadeira.mp4',
+  v10: '/videos/v10-copo-termico.mp4',
+  v4: '/videos/v4-filtro-linha.mp4',
+  v13: '/videos/v13-kit-ferramentas.mp4',
+  v7: '/videos/v7-tiras-clareadoras.mp4',
+  v12: '/videos/v12-massageador.mp4',
+  v9: '/videos/v9-magnesio.mp4',
+  v1: '/videos/v1-oculos.mp4',
+  v8: '/videos/v8-capa-celular.mp4',
+  v3: '/videos/v5-panelas.mp4',
+};
+
+function VideoPreviewCard({
+  video,
+  enabled,
+  onSelect,
+}: {
+  key?: string;
+  video: Video;
+  enabled: boolean;
+  onSelect: (video: Video) => void;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: '100px 0px', threshold: 0.15 },
+    );
+
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
+
+  const shouldPlay = enabled && isVisible;
+
+  return (
+    <motion.div
+      ref={cardRef}
+      variants={item}
+      className="video-card glass-panel glass-panel-hover rounded-[2rem] overflow-hidden group cursor-pointer hover:shadow-[0_0_35px_rgba(249,115,22,0.3)] hover:border-orange-500/50 transition-all duration-300"
+      onClick={() => onSelect(video)}
+    >
+      <div className="aspect-[9/16] relative overflow-hidden m-3 rounded-[1.6rem] bg-slate-900/80 border border-white/10">
+        {shouldPlay ? (
+          <video
+            src={previewById[video.id]}
+            poster={video.thumbnail}
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            disablePictureInPicture
+            aria-label={`Preview de ${video.productName}`}
+          />
+        ) : (
+          <img
+            src={video.thumbnail}
+            alt={video.productName}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/15 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+        <div className="absolute bottom-3 left-3 right-3 text-white z-10">
+          <p className="font-bold text-xs leading-snug line-clamp-2">{video.productName}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export function GalleryView() {
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [activeFilter, setActiveFilter] = useState('Todos');
@@ -24,20 +108,43 @@ export function GalleryView() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [pageVisible, setPageVisible] = useState(() => !document.hidden);
+  const modalVideoRef = useRef<HTMLVideoElement>(null);
 
   const filters = ['Todos', 'Mais vistos', 'UGC', 'POV', 'Review', 'Antes e Depois', 'Unboxing'];
-  const previewById: Record<string,string> = {v11:'/videos/v11-chaleira.mp4',v2:'/videos/v2-facas.mp4',v5:'/videos/v5-panelas.mp4',v6:'/videos/v6-parafusadeira.mp4',v10:'/videos/v10-copo-termico.mp4',v4:'/videos/v4-filtro-linha.mp4',v13:'/videos/v13-kit-ferramentas.mp4',v7:'/videos/v7-tiras-clareadoras.mp4',v12:'/videos/v12-massageador.mp4',v9:'/videos/v9-magnesio.mp4',v1:'/videos/v1-oculos.mp4',v8:'/videos/v8-capa-celular.mp4',v3:'/videos/v5-panelas.mp4'};
 
-  const filteredVideos = videos.filter(video => {
+  useEffect(() => {
+    const handleVisibility = () => setPageVisible(!document.hidden);
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
+
+  useEffect(() => {
+    const player = modalVideoRef.current;
+    if (!player) return;
+
+    if (isPlaying && pageVisible) {
+      void player.play().catch(() => undefined);
+    } else {
+      player.pause();
+    }
+  }, [isPlaying, pageVisible, selectedVideo]);
+
+  const filteredVideos = useMemo(() => videos.filter(video => {
     const matchesSearch = video.productName.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           video.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           video.hashtags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+
     if (activeFilter === 'Todos' || activeFilter === 'Mais vistos') {
       return matchesSearch;
     }
     return matchesSearch && video.type.includes(activeFilter);
-  });
+  }), [activeFilter, searchQuery]);
+
+  const openVideo = useCallback((video: Video) => {
+    setSelectedVideo(video);
+    setIsPlaying(true);
+  }, []);
 
   const handleCopyHook = () => {
     if (selectedVideo) {
@@ -48,7 +155,7 @@ export function GalleryView() {
   };
 
   return (
-    <motion.div 
+    <motion.div
       variants={container}
       initial="hidden"
       animate="show"
@@ -56,7 +163,7 @@ export function GalleryView() {
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 text-pink-400 text-xs font-bold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-orange-400 text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-4 h-4" />
             <span>Criativos de Alta Conversão</span>
           </div>
@@ -69,13 +176,13 @@ export function GalleryView() {
         </div>
 
         <div className="relative group w-full md:w-80">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-pink-400 transition-colors" />
-          <input 
-            type="text" 
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-orange-400 transition-colors" />
+          <input
+            type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Buscar por produto, gancho ou hashtag..." 
-            className="w-full bg-white/[0.04] backdrop-blur-xl border border-white/10 text-white placeholder-slate-400 rounded-2xl pl-12 pr-6 py-3 text-sm focus:outline-none focus:border-pink-500/50 focus:bg-white/[0.08] shadow-inner transition-all"
+            placeholder="Buscar por produto, gancho ou hashtag..."
+            className="w-full bg-white/[0.04] backdrop-blur-xl border border-white/10 text-white placeholder-slate-400 rounded-2xl pl-12 pr-6 py-3 text-sm focus:outline-none focus:border-orange-500/50 focus:bg-white/[0.08] shadow-inner transition-all"
           />
         </div>
       </div>
@@ -83,12 +190,12 @@ export function GalleryView() {
       {/* Filter Chips */}
       <div className="flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none">
         {filters.map((filter) => (
-          <button 
+          <button
             key={filter}
             onClick={() => setActiveFilter(filter)}
             className={`px-6 py-2.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all border ${
-              activeFilter === filter 
-                ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-[0_0_20px_rgba(244,63,94,0.35)] border-white/30 scale-105' 
+              activeFilter === filter
+                ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.35)] border-white/30 scale-105'
                 : 'bg-white/[0.04] backdrop-blur-xl border-white/10 text-slate-300 hover:text-white hover:bg-white/10'
             }`}
           >
@@ -100,32 +207,21 @@ export function GalleryView() {
       {/* Video Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredVideos.map((video) => (
-          <motion.div 
+          <VideoPreviewCard
             key={video.id}
-            variants={item}
-            className="video-card glass-panel glass-panel-hover rounded-[2rem] overflow-hidden group cursor-pointer hover:shadow-[0_0_35px_rgba(244,63,94,0.3)] hover:border-pink-500/50 transition-all duration-300"
-            onClick={() => {
-              setSelectedVideo(video);
-              setIsPlaying(true);
-            }}
-          >
-            <div className="aspect-[9/16] relative overflow-hidden m-3 rounded-[1.6rem] bg-slate-900/80 border border-white/10">
-              {/* Autoplay video preview feed with active motion */}
-              <video src={previewById[video.id]} poster={video.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" aria-label={`Preview de ${video.productName}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/15 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-              
-              <div className="absolute bottom-3 left-3 right-3 text-white z-10"><p className="font-bold text-xs leading-snug line-clamp-2">{video.productName}</p></div>
-            </div>
-          </motion.div>
+            video={video}
+            enabled={pageVisible && !selectedVideo}
+            onSelect={openVideo}
+          />
         ))}
       </div>
 
       {filteredVideos.length === 0 && (
         <div className="py-20 text-center space-y-3 bg-white/[0.02] border border-white/5 rounded-3xl">
           <p className="text-slate-400 text-sm font-medium">Nenhum vídeo encontrado para "{searchQuery}".</p>
-          <button 
+          <button
             onClick={() => { setSearchQuery(''); setActiveFilter('Todos'); }}
-            className="text-xs text-pink-400 hover:underline font-bold"
+            className="text-xs text-orange-400 hover:underline font-bold"
           >
             Limpar busca e filtros
           </button>
@@ -135,20 +231,20 @@ export function GalleryView() {
       {/* Video Detail Modal */}
       <AnimatePresence>
         {selectedVideo && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-slate-950/85 backdrop-blur-2xl">
-            <motion.div 
+          <div className="video-modal-shell fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8 bg-slate-950/85 backdrop-blur-2xl">
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="glass-panel rounded-[2.5rem] w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-[0_25px_60px_rgba(0,0,0,0.8)] border border-white/20"
+              className="video-modal-card glass-panel rounded-[2.5rem] w-full max-w-5xl max-h-[92vh] overflow-hidden flex flex-col md:flex-row shadow-[0_25px_60px_rgba(0,0,0,0.8)] border border-white/20"
             >
               {/* Left Column: Simulated Vertical Video Player */}
-              <div className="md:w-[400px] h-[450px] md:h-auto bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center group shrink-0 border-r border-white/10">
-                <video src={previewById[selectedVideo.id]} poster={selectedVideo.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline controls aria-label={`Vídeo de ${selectedVideo.productName}`} />
+              <div className="video-modal-player md:w-[400px] h-[450px] md:h-auto bg-slate-950 relative overflow-hidden flex flex-col items-center justify-center group shrink-0 border-r border-white/10">
+                <video ref={modalVideoRef} src={previewById[selectedVideo.id]} poster={selectedVideo.thumbnail} className="w-full h-full object-cover" autoPlay muted loop playsInline controls preload="metadata" aria-label={`Vídeo de ${selectedVideo.productName}`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/40" />
 
                 {/* Back Button */}
-                <button 
+                <button
                   onClick={() => setSelectedVideo(null)}
                   className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-slate-800 transition-all flex items-center gap-1.5 shadow-lg"
                 >
@@ -157,18 +253,18 @@ export function GalleryView() {
 
                 {/* Simulated Player Controls Overlay */}
                 <div className="absolute top-4 right-4 flex items-center gap-2">
-                  <div className="bg-rose-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md animate-pulse">
+                  <div className="bg-amber-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md animate-pulse">
                     <span className="w-1.5 h-1.5 rounded-full bg-white" />
                     AO VIVO VIRAL
                   </div>
                 </div>
 
                 {/* Center Play/Pause button */}
-                <button 
+                <button
                   onClick={() => setIsPlaying(!isPlaying)}
                   className="absolute inset-0 flex items-center justify-center group/btn"
                 >
-                  <div className="w-16 h-16 rounded-full bg-pink-500/90 text-white flex items-center justify-center shadow-2xl shadow-pink-500/50 transform group-hover/btn:scale-110 transition-transform">
+                  <div className="w-16 h-16 rounded-full bg-orange-500/90 text-white flex items-center justify-center shadow-2xl shadow-orange-500/50 transform group-hover/btn:scale-110 transition-transform">
                     {isPlaying ? (
                       <span className="text-xs font-bold uppercase tracking-wider">PAUSAR</span>
                     ) : (
@@ -180,7 +276,7 @@ export function GalleryView() {
                 {/* Bottom TikTok Style Overlay */}
                 <div className="absolute bottom-6 left-5 right-5 space-y-3 text-white">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center font-bold text-xs shadow-md border border-white/20">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center font-bold text-xs shadow-md border border-white/20">
                       YV
                     </div>
                     <div>
@@ -191,19 +287,19 @@ export function GalleryView() {
                   <p className="text-xs font-medium text-slate-100 line-clamp-2 leading-snug">
                     {selectedVideo.description}
                   </p>
-                  <div className="flex items-center gap-3 text-[11px] font-bold text-pink-300 pt-1">
+                  <div className="flex items-center gap-3 text-[11px] font-bold text-orange-300 pt-1">
                     <span className="flex items-center gap-1"><Eye className="w-3.5 h-3.5" /> {selectedVideo.views}</span>
-                    <span className="flex items-center gap-1"><Heart className="w-3.5 h-3.5 fill-pink-500 text-pink-500" /> {selectedVideo.likes}</span>
+                    <span className="flex items-center gap-1"><Heart className="w-3.5 h-3.5 fill-orange-500 text-orange-500" /> {selectedVideo.likes}</span>
                     <span className="flex items-center gap-1"><MessageSquare className="w-3.5 h-3.5" /> {selectedVideo.comments}</span>
                   </div>
                 </div>
               </div>
 
               {/* Right Column: Creative Analysis & Hook Details */}
-              <div className="flex-1 p-6 md:p-10 space-y-8 overflow-y-auto bg-slate-900/80 backdrop-blur-2xl">
+              <div className="video-modal-details flex-1 p-6 md:p-10 space-y-8 overflow-y-auto bg-slate-900/80 backdrop-blur-2xl">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="bg-pink-500/20 text-pink-300 border border-pink-400/30 text-[10px] font-bold px-3 py-1 rounded-xl uppercase tracking-wider">
+                    <span className="bg-orange-500/20 text-orange-300 border border-orange-400/30 text-[10px] font-bold px-3 py-1 rounded-xl uppercase tracking-wider">
                       Criativo de Alta Conversão
                     </span>
                     <span className="text-xs text-slate-400 font-medium">{selectedVideo.publishedAt}</span>
@@ -216,7 +312,7 @@ export function GalleryView() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                      <Sparkles className="w-4 h-4 text-pink-400" />
+                      <Sparkles className="w-4 h-4 text-orange-400" />
                       Roteiro e Gancho Utilizado
                     </h4>
                     {copied && (
@@ -238,7 +334,7 @@ export function GalleryView() {
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedVideo.hashtags.map(tag => (
-                      <span key={tag} className="bg-white/[0.05] text-slate-200 text-xs font-bold px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-pink-500/40 hover:text-pink-300 transition-colors">
+                      <span key={tag} className="bg-white/[0.05] text-slate-200 text-xs font-bold px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-orange-500/40 hover:text-orange-300 transition-colors">
                         #{tag}
                       </span>
                     ))}
@@ -246,16 +342,16 @@ export function GalleryView() {
                 </div>
 
                 <div className="space-y-3 pt-4 border-t border-white/10">
-                  <button 
+                  <button
                     onClick={handleCopyHook}
-                    className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-3.5 rounded-xl hover:opacity-95 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(244,63,94,0.3)] border border-white/20 text-xs"
+                    className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-3.5 rounded-xl hover:opacity-95 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(249,115,22,0.3)] border border-white/20 text-xs"
                   >
                     {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     {copied ? 'Roteiro Copiado!' : 'Copiar Roteiro e Ganchos do Vídeo'}
                   </button>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <a 
+                    <a
                       href={selectedVideo.url !== '#' ? selectedVideo.url : 'https://www.tiktok.com/?_r=1'}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -263,11 +359,11 @@ export function GalleryView() {
                     >
                       <ExternalLink className="w-3.5 h-3.5" /> Abrir no TikTok
                     </a>
-                    <button 
+                    <button
                       onClick={() => setSaved(!saved)}
-                      className={`glass-button py-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${saved ? 'text-pink-400 border-pink-500/40' : 'text-slate-200'}`}
+                      className={`glass-button py-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${saved ? 'text-orange-400 border-orange-500/40' : 'text-slate-200'}`}
                     >
-                      <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-pink-400' : ''}`} />
+                      <Bookmark className={`w-3.5 h-3.5 ${saved ? 'fill-orange-400' : ''}`} />
                       {saved ? 'Salvo nos Favoritos' : 'Salvar Vídeo'}
                     </button>
                   </div>
@@ -280,4 +376,3 @@ export function GalleryView() {
     </motion.div>
   );
 }
-

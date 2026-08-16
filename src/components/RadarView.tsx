@@ -1,149 +1,87 @@
-import { useState } from 'react';
-import { 
-  Flame, 
-  LayoutGrid, 
-  Layers, 
-  BarChart3, 
-  ExternalLink,
-  Sparkles
-} from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { BarChart3, ExternalLink, Flame, Search, ShoppingBag, Sparkles, TrendingUp } from 'lucide-react';
 import { motion } from 'motion/react';
-import { products } from '../data';
-import { Product } from '../types';
+import { shopeeProducts as products } from '../shopeeProducts';
+import type { Product } from '../types';
 import { CreateProductFlowModal } from './CreateProductFlowModal';
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.05 }
-  }
-};
+const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.04 } } };
+const item = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } };
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-};
-
-export function RadarView({ onSelectProduct }: { onSelectProduct: (p: Product) => void }) {
+export function RadarView({ onSelectProduct }: { onSelectProduct: (product: Product) => void }) {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('Todos');
+
+  const categories = useMemo(() => ['Todos', ...Array.from(new Set(products.map((product) => product.category)))], []);
+  const filteredProducts = useMemo(() => products.filter((product) => {
+    const matchesSearch = `${product.name} ${product.category}`.toLowerCase().includes(search.toLowerCase());
+    return matchesSearch && (category === 'Todos' || product.category === category);
+  }), [category, search]);
 
   return (
     <>
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="products-view max-w-7xl mx-auto py-12 px-8 space-y-10"
-      >
-        {/* Header Tabs & "criar produto novo" Button */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.02] p-4 rounded-[2rem] border border-white/10 backdrop-blur-2xl shadow-xl">
-          <div className="flex bg-white/[0.04] p-1.5 rounded-2xl backdrop-blur-2xl border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
-            <button className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-sm font-bold shadow-[0_0_20px_rgba(244,63,94,0.3)] border border-white/20">
-              <LayoutGrid className="w-4 h-4" /> Todos os Produtos
-            </button>
-            <button className="flex items-center gap-2 px-6 py-2.5 text-slate-300 hover:text-white rounded-xl text-sm font-bold transition-all hover:bg-white/5">
-              <Layers className="w-4 h-4" /> Dividir por Nicho
+      <motion.div variants={container} initial="hidden" animate="show" className="products-view max-w-[1500px] mx-auto py-8 sm:py-10 px-4 sm:px-6 lg:px-10 space-y-7">
+        <motion.section variants={item} className="relative overflow-hidden rounded-[2.25rem] border border-orange-400/20 bg-[linear-gradient(135deg,rgba(249,115,22,0.16),rgba(249,115,22,0.08)_45%,rgba(255,255,255,0.025))] p-6 sm:p-8">
+          <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-orange-500/15 blur-3xl" />
+          <div className="relative flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div className="max-w-3xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-orange-400/25 bg-orange-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-orange-300">
+                <ShoppingBag className="h-3.5 w-3.5" /> Inteligência de produtos Shopee
+              </span>
+              <h1 className="mt-4 text-3xl sm:text-4xl font-display font-black text-white tracking-tight">Radar de oportunidades</h1>
+              <p className="mt-2 max-w-2xl text-sm sm:text-base text-slate-300">Produtos selecionados por demanda, potencial de conteúdo e comissão. Todos os cards levam ao anúncio correspondente na Shopee.</p>
+            </div>
+            <button onClick={() => setIsCreateModalOpen(true)} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 px-6 py-3.5 text-sm font-black text-white shadow-[0_12px_35px_rgba(249,115,22,0.25)] transition hover:-translate-y-0.5">
+              <Sparkles className="h-4 w-4" /> Adicionar produto
             </button>
           </div>
+        </motion.section>
 
-          <button 
-            onClick={() => setIsCreateModalOpen(true)}
-            className="flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 text-white rounded-2xl text-sm font-extrabold shadow-[0_0_30px_rgba(244,63,94,0.5)] border border-white/30 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
-          >
-            <Sparkles className="w-4 h-4 text-white group-hover:rotate-12 transition-transform" />
-            + criar produto novo
-          </button>
-        </div>
+        <motion.div variants={item} className="glass-panel rounded-[1.75rem] p-4 flex flex-col lg:flex-row gap-4 lg:items-center">
+          <label className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Buscar produto ou nicho..." className="w-full rounded-2xl border border-white/10 bg-black/30 py-3 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-orange-400/50" />
+          </label>
+          <div className="flex gap-2 overflow-x-auto pb-1 lg:max-w-[65%]">
+            {categories.map((option) => (
+              <button key={option} onClick={() => setCategory(option)} className={`whitespace-nowrap rounded-xl px-4 py-2.5 text-xs font-bold transition ${category === option ? 'bg-orange-500 text-white shadow-[0_8px_24px_rgba(249,115,22,0.2)]' : 'bg-white/[0.04] text-slate-300 hover:bg-white/[0.08]'}`}>{option}</button>
+            ))}
+          </div>
+        </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product, index) => (
-            <motion.div 
-              key={product.id}
-              variants={item}
-              className="product-card glass-panel glass-panel-hover rounded-[2.2rem] overflow-hidden group cursor-pointer flex flex-col h-full hover:shadow-[0_0_35px_rgba(244,63,94,0.25)] hover:border-pink-500/40"
-              onClick={() => onSelectProduct(product)}
-            >
-              {/* Image Container */}
-              <div className="aspect-square relative m-3 rounded-[1.6rem] overflow-hidden bg-slate-900/60 border border-white/10">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Top Badges */}
-                <div className="absolute top-3 left-3 flex flex-col gap-2">
-                  <div className="bg-slate-950/70 border border-white/20 text-white text-[10px] font-bold px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg backdrop-blur-xl">
-                    <Flame className="w-3 h-3 text-pink-500 fill-pink-500" />
-                    Top #{index + 1}
-                  </div>
-                </div>
-
-                <div className="absolute top-3 right-3">
-                  <div className="bg-black/50 backdrop-blur-xl text-slate-200 text-[10px] font-bold px-3 py-1.5 rounded-xl border border-white/20">
-                    {product.category}
-                  </div>
-                </div>
-
-                {/* Bottom Badge */}
-                <div className="absolute bottom-3 left-3">
-                  <div className="bg-slate-950/90 text-rose-400 border border-rose-500/50 backdrop-blur-xl text-[10px] font-black px-3 py-1.5 rounded-xl flex items-center gap-1.5 uppercase tracking-wider shadow-xl">
-                    <Flame className="w-3 h-3 text-rose-500 fill-rose-500 animate-pulse" />
-                    <span>ALTA DEMANDA</span>
-                  </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+          {filteredProducts.map((product, index) => (
+            <motion.article key={product.id} variants={item} onClick={() => onSelectProduct(product)} className="group cursor-pointer overflow-hidden rounded-[2rem] border border-white/10 bg-[#0c0c0f]/95 shadow-[0_16px_50px_rgba(0,0,0,0.25)] transition duration-300 hover:-translate-y-1 hover:border-orange-400/35">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white/[0.03]">
+                <img src={product.image} alt={product.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
+                <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/15 bg-black/65 px-3 py-1.5 text-[10px] font-black text-white backdrop-blur-xl"><Flame className="h-3 w-3 fill-orange-400 text-orange-400" /> TOP #{index + 1}</div>
+                <div className="absolute right-4 top-4 rounded-full border border-emerald-400/25 bg-emerald-500/15 px-3 py-1.5 text-[10px] font-black text-emerald-300">{product.variation}</div>
+                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
+                  <div><p className="text-[10px] font-bold uppercase tracking-wider text-orange-300">Preço Shopee</p><p className="text-2xl font-black text-white">{product.price}</p></div>
+                  <div className="rounded-xl border border-white/15 bg-black/55 px-3 py-2 text-right backdrop-blur-xl"><p className="text-[9px] uppercase text-slate-400">Vendidos</p><p className="text-sm font-black text-white">{product.sales}</p></div>
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-6 pt-2 space-y-4 flex-1 flex flex-col">
-                <h3 className="font-bold text-sm text-white line-clamp-2 leading-tight h-10 group-hover:text-pink-300 transition-colors">
-                  {product.name}
-                </h3>
-
-                <div className="space-y-1">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-emerald-400 font-bold text-lg drop-shadow-sm">{product.price.split(',')[0]}</span>
-                    <span className="text-emerald-400 font-bold text-xs">,{product.price.split(',')[1] || '90'}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] font-bold text-slate-400">
-                    <span>{product.revenue}</span>
-                    <div className="w-1 h-1 bg-white/20 rounded-full" />
-                    <span>{product.sales} vendidos</span>
-                  </div>
+              <div className="p-5 sm:p-6">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-orange-300">{product.category}</p>
+                <h2 className="mt-2 min-h-12 text-base font-bold leading-snug text-white line-clamp-2">{product.name}</h2>
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl border border-white/8 bg-white/[0.035] p-3"><p className="text-[9px] uppercase tracking-wider text-slate-500">Comissão estimada</p><p className="mt-1 font-black text-emerald-400">{product.commission}</p></div>
+                  <div className="rounded-2xl border border-white/8 bg-white/[0.035] p-3"><p className="text-[9px] uppercase tracking-wider text-slate-500">Score Looply</p><p className="mt-1 font-black text-orange-300">{product.aiScore}/100</p></div>
                 </div>
-
-                <div className="pt-2 flex gap-2">
-                  <button className="flex-1 flex items-center justify-center gap-2 py-3 glass-button text-slate-200 rounded-xl text-[11px] font-bold hover:text-white">
-                    <BarChart3 className="w-3.5 h-3.5" />
-                    Análise
-                  </button>
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (product.affiliateLink) {
-                        window.open(product.affiliateLink, '_blank', 'noopener,noreferrer');
-                      }
-                    }}
-                    className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-[11px] font-bold shadow-[0_0_15px_rgba(244,63,94,0.3)] hover:opacity-90 border border-white/20 transition-all"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    Afiliar
-                  </button>
+                <div className="mt-4 flex gap-3">
+                  <button className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-3 text-xs font-bold text-slate-200 hover:bg-white/[0.08]"><BarChart3 className="h-4 w-4" /> Analisar</button>
+                  <a href={product.affiliateLink} target="_blank" rel="noopener noreferrer" onClick={(event) => event.stopPropagation()} className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 py-3 text-xs font-black text-white shadow-[0_8px_22px_rgba(249,115,22,0.2)]"><ExternalLink className="h-4 w-4" /> Abrir na Shopee</a>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
-      </motion.div>
 
-      {/* Create Product Flow Modal */}
-      <CreateProductFlowModal 
-        isOpen={isCreateModalOpen} 
-        onClose={() => setIsCreateModalOpen(false)} 
-      />
+        {filteredProducts.length === 0 && <div className="glass-panel rounded-[2rem] p-12 text-center"><TrendingUp className="mx-auto h-8 w-8 text-orange-400" /><p className="mt-3 font-bold text-white">Nenhum produto encontrado</p><p className="mt-1 text-sm text-slate-400">Tente outro termo ou selecione todos os nichos.</p></div>}
+      </motion.div>
+      <CreateProductFlowModal isOpen={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)} />
     </>
   );
 }

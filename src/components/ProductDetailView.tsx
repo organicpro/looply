@@ -1,22 +1,22 @@
 import { useState } from 'react';
-import { 
-  ArrowLeft, 
-  ExternalLink, 
-  Play, 
-  ShoppingBag, 
-  BarChart3, 
-  Tag, 
-  Flame, 
-  ChevronRight, 
-  Sparkles, 
-  Clock, 
-  X, 
-  Calendar, 
-  Tv, 
-  TrendingUp, 
-  Copy, 
-  Check, 
-  Wand2, 
+import {
+  ArrowLeft,
+  ExternalLink,
+  Play,
+  ShoppingBag,
+  BarChart3,
+  Tag,
+  Flame,
+  ChevronRight,
+  Sparkles,
+  Clock,
+  X,
+  Calendar,
+  Tv,
+  TrendingUp,
+  Copy,
+  Check,
+  Wand2,
   Volume2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -143,63 +143,63 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
   };
 
   return (
-    <div className="min-h-screen bg-[#080006] text-[#f1f5f9] font-sans antialiased pb-20 selection:bg-pink-500/30 selection:text-white relative overflow-hidden">
+    <div className="product-detail-view min-h-screen bg-[#080503] text-[#f1f5f9] font-sans antialiased pb-20 selection:bg-orange-500/30 selection:text-white relative overflow-hidden">
       {/* Dynamic Glass Mesh Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[650px] h-[650px] bg-pink-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[20%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-[650px] h-[650px] bg-orange-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-amber-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[20%] w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Main Container */}
       <div className="max-w-[1200px] mx-auto py-12 px-6 md:px-10 space-y-10 relative z-10">
-        
+
         {/* Navigation Bar */}
         <div className="flex items-center justify-between">
-          <button 
+          <button
             onClick={onBack}
             className="flex items-center gap-3 text-slate-300 hover:text-white transition-all text-sm font-semibold group glass-button px-5 py-2.5 rounded-full"
           >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform text-pink-400" /> Voltar ao Radar
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform text-orange-400" /> Voltar ao Radar
           </button>
-          
+
           <div className="flex items-center gap-2 glass-panel rounded-full px-5 py-2">
              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ID do Produto:</span>
-             <span className="text-[11px] font-mono font-bold text-pink-300">{product.id}</span>
+             <span className="text-[11px] font-mono font-bold text-orange-300">{product.id}</span>
           </div>
         </div>
 
         {/* Dynamic Details Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[430px_1fr] gap-12 items-start">
-          
+
           {/* Left Column (Sticky Image & Strategy Recommendation) */}
           <div className="space-y-8 lg:sticky lg:top-8">
-            
+
             {/* Elegant Framed Product Image */}
             <div className="aspect-square rounded-[2.5rem] overflow-hidden glass-panel p-5 relative group shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
-              <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-              <img 
-                src={product.image} 
-                alt={product.name} 
-                className="w-full h-full object-cover rounded-[2rem] group-hover:scale-105 transition-transform duration-700 shadow-2xl border border-white/10" 
-                referrerPolicy="no-referrer" 
+              <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover rounded-[2rem] group-hover:scale-105 transition-transform duration-700 shadow-2xl border border-white/10"
+                referrerPolicy="no-referrer"
               />
             </div>
-            
+
             {/* Strategic Recommendation Panel */}
             <div className="glass-panel rounded-[2.2rem] p-8 space-y-5 shadow-xl relative overflow-hidden group">
-              <div className="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all duration-700" />
+              <div className="absolute -right-10 -top-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl group-hover:bg-amber-500/20 transition-all duration-700" />
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-[#ff73aa] uppercase tracking-[0.2em] drop-shadow-sm">Recomendação Estratégica</span>
-                <div className="w-2.5 h-2.5 bg-blue-400 rounded-full animate-pulse shadow-[0_0_15px_rgba(56,189,248,0.8)]" />
+                <span className="text-[10px] font-bold text-[#fb923c] uppercase tracking-[0.2em] drop-shadow-sm">Recomendação Estratégica</span>
+                <div className="w-2.5 h-2.5 bg-amber-400 rounded-full animate-pulse shadow-[0_0_15px_rgba(251,146,60,0.8)]" />
               </div>
               <p className="text-[15px] font-medium text-slate-200 leading-relaxed italic opacity-95">
                 "{product.recommendation}"
               </p>
             </div>
           </div>
-          
+
           {/* Right Column (Metrics, Performance and Action Actions) */}
           <div className="space-y-10">
-            
+
             {/* Category and Badges */}
             <div className="space-y-4">
               <div className="flex flex-wrap items-center gap-3">
@@ -207,12 +207,12 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
                   {product.category}
                 </span>
                 <div className="h-4 w-[1px] bg-white/10 hidden sm:block" />
-                <div className="flex items-center gap-2 bg-rose-500/25 border border-rose-500/50 px-4 py-1.5 rounded-full shadow-sm">
-                  <Flame className="w-4 h-4 text-rose-400 fill-rose-400 animate-pulse" />
-                  <span className="text-[10px] font-extrabold text-rose-200 uppercase tracking-[0.2em]">Escalando agora</span>
+                <div className="flex items-center gap-2 bg-amber-500/25 border border-amber-500/50 px-4 py-1.5 rounded-full shadow-sm">
+                  <Flame className="w-4 h-4 text-amber-400 fill-amber-400 animate-pulse" />
+                  <span className="text-[10px] font-extrabold text-amber-200 uppercase tracking-[0.2em]">Escalando agora</span>
                 </div>
               </div>
-              
+
               <h1 className="text-4xl sm:text-5xl font-display font-bold tracking-tight text-white leading-tight drop-shadow-sm">
                 {product.name}
               </h1>
@@ -220,7 +220,7 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
 
             {/* Price and Affiliate Potential */}
             <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-6">
-              
+
               {/* CURRENT PRICE Card */}
               <div className="glass-panel p-8 rounded-[2rem] flex flex-col justify-between space-y-4">
                 <div className="space-y-1">
@@ -239,18 +239,18 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
                 <div className="space-y-1.5">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Potencial para Afiliado</span>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-display font-bold text-pink-400 drop-shadow-sm">{affiliatePotential}%</span>
+                    <span className="text-3xl font-display font-bold text-orange-400 drop-shadow-sm">{affiliatePotential}%</span>
                     <span className="text-xs font-bold text-slate-400 uppercase">Score Máximo</span>
                   </div>
                 </div>
                 {/* Progress bar */}
                 <div className="w-full space-y-1.5">
                   <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden border border-white/10">
-                    <motion.div 
+                    <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${affiliatePotential}%` }}
                       transition={{ duration: 1.2, ease: "easeOut" }}
-                      className="bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 h-full rounded-full shadow-[0_0_12px_rgba(244,63,94,0.6)]"
+                      className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 h-full rounded-full shadow-[0_0_12px_rgba(249,115,22,0.6)]"
                     />
                   </div>
                   <div className="flex justify-between text-[10px] font-bold text-slate-400">
@@ -263,14 +263,14 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
 
             {/* PERFORMANCE METRICS CONTAINER (WITH TIMEFRAME SELECTOR) */}
             <div className="glass-panel rounded-[2.2rem] p-8 space-y-8">
-              
+
               {/* Header and timeframe tabs selector */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
                 <div className="flex items-center gap-3">
-                  <BarChart3 className="w-5 h-5 text-pink-400" />
+                  <BarChart3 className="w-5 h-5 text-orange-400" />
                   <h3 className="font-display font-bold text-lg text-white">Métricas de Desempenho</h3>
                 </div>
-                
+
                 {/* Timeframe Selector Tabs */}
                 <div className="flex bg-white/[0.04] backdrop-blur-xl border border-white/10 p-1 rounded-xl">
                   {(['1D', '7D', '30D', '90D', '180D'] as const).map((tf) => (
@@ -278,8 +278,8 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
                       key={tf}
                       onClick={() => setTimeframe(tf)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                        timeframe === tf 
-                          ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-white/20' 
+                        timeframe === tf
+                          ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.3)] border border-white/20'
                           : 'text-slate-300 hover:text-white'
                       }`}
                     >
@@ -297,151 +297,62 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
                 <span className="font-bold text-slate-100">{dateLabel}</span>
               </div>
 
-              {/* Bento Grid Metrics 8 Items */}
+              {/* Shopee intelligence metrics */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                
-                {/* Metric 1: RECEITA */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">RECEITA</span>
-                  <div className="space-y-1">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-white block leading-none">{calculatedRevenue}</span>
-                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-400/20 px-1.5 py-0.5 rounded inline-block">{product.variation}</span>
-                  </div>
-                </div>
-
-                {/* Metric 2: VENDIDOS */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">VENDIDOS</span>
-                  <div className="space-y-1">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-white block leading-none">{calculatedSales}</span>
-                    <span className="text-[10px] text-slate-300 font-semibold block">Unidades</span>
-                  </div>
-                </div>
-
-                {/* Metric 3: PREÇO MÉDIO */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">PREÇO MÉDIO</span>
-                  <div className="space-y-1">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-white block leading-none">{product.price}</span>
-                    <span className="text-[10px] text-slate-300 font-semibold block">Estável</span>
-                  </div>
-                </div>
-
-                {/* Metric 4: CONVERSÃO CRIADOR */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">CONVERSÃO CRIADOR</span>
-                  <div className="space-y-1">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-pink-400 block leading-none">{creatorConversion}</span>
-                    <span className="text-[10px] text-pink-300 font-semibold block">Conversão Média</span>
-                  </div>
-                </div>
-
-                {/* Metric 5: % RECEITA LIVE */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">% RECEITA LIVE</span>
-                  <div className="space-y-1">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-orange-400 block leading-none">{liveRevenuePercent}%</span>
-                    <span className="text-[10px] text-slate-300 font-semibold block">Transmissão</span>
-                  </div>
-                </div>
-
-                {/* Metric 6: % RECEITA VÍDEO */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">% RECEITA VÍDEO</span>
-                  <div className="space-y-1">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-purple-400 block leading-none">{videoRevenuePercent}%</span>
-                    <span className="text-[10px] text-slate-300 font-semibold block">Vídeos Curtos</span>
-                  </div>
-                </div>
-
-                {/* Metric 7: % RECEITA CARTÃO */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">% RECEITA CARTÃO</span>
-                  <div className="space-y-1">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-blue-400 block leading-none">{product.cardRevenuePercent || '-5%'}</span>
-                    <span className="text-[10px] text-slate-300 font-semibold block">Desconto Especial</span>
-                  </div>
-                </div>
-
-                {/* Metric 8: CONCENTRAÇÃO */}
-                <div className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-pink-500/30 transition-all duration-300">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">CONCENTRAÇÃO</span>
-                  <div className="space-y-2">
-                    <span className="text-xl sm:text-2xl font-display font-bold text-white block leading-none">{concentration}</span>
-                    <div className="flex items-center gap-1">
-                      <span className={`w-2 h-2 rounded-full ${concentration === 'Alta' ? 'bg-pink-500 animate-pulse shadow-[0_0_8px_rgba(244,63,94,0.8)]' : 'bg-orange-400'}`} />
-                      <span className="text-[9px] font-bold text-slate-300 uppercase">Mercado Ativo</span>
+                {[
+                  { label: 'SCORE LOOPLY', value: `${product.aiScore}/100`, note: product.variation, color: 'text-orange-300' },
+                  { label: 'VENDIDOS', value: calculatedSales, note: 'Unidades na Shopee', color: 'text-white' },
+                  { label: 'PREÇO SHOPEE', value: product.price, note: 'Preço do anúncio', color: 'text-white' },
+                  { label: 'COMISSÃO ESTIMADA', value: product.commission, note: 'Por pedido aprovado', color: 'text-emerald-400' },
+                  { label: 'CONVERSÃO ESTIMADA', value: creatorConversion, note: 'Potencial do criativo', color: 'text-orange-400' },
+                  { label: 'VÍDEOS MAPEADOS', value: product.viralVideos.toString(), note: 'Referências criativas', color: 'text-amber-400' },
+                  { label: 'LOJA', value: product.shop, note: 'Origem do anúncio', color: 'text-orange-300' },
+                  { label: 'DEMANDA', value: concentration, note: 'Mercado ativo', color: 'text-orange-400' },
+                ].map((metric) => (
+                  <div key={metric.label} className="bg-white/[0.04] backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex flex-col justify-between hover:border-orange-500/30 transition-all duration-300 min-w-0">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">{metric.label}</span>
+                    <div className="space-y-1 min-w-0">
+                      <span className={`text-lg sm:text-xl font-display font-bold block leading-tight truncate ${metric.color}`}>{metric.value}</span>
+                      <span className="text-[10px] text-slate-300 font-semibold block">{metric.note}</span>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
-
-            {/* SALES SOURCE SECTION (FONTE DE VENDA) */}
+            {/* Discovery channel mix */}
             <div className="glass-panel rounded-[2.2rem] p-8 space-y-6">
-              <div className="flex items-center gap-3">
-                <Tv className="w-5 h-5 text-pink-400" />
-                <h3 className="font-display font-bold text-lg text-white">Fonte de Venda</h3>
-              </div>
-
+              <div className="flex items-center gap-3"><Tv className="w-5 h-5 text-orange-400" /><h3 className="font-display font-bold text-lg text-white">Canais de descoberta</h3></div>
               <div className="space-y-5">
-                {/* UGC Videos Source Row */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-bold text-slate-200 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]" /> Vídeos Curtos (UGC)
-                    </span>
-                    <span className="font-mono font-bold text-pink-300">{ugcSourcePercent}%</span>
+                {[
+                  { label: 'Shopee Vídeo e conteúdo UGC', value: ugcSourcePercent, color: 'from-orange-500 to-amber-500' },
+                  { label: 'Busca e recomendações Shopee', value: 100 - ugcSourcePercent, color: 'from-orange-600 to-amber-500' },
+                ].map((channel) => (
+                  <div key={channel.label} className="space-y-2">
+                    <div className="flex justify-between items-center gap-4 text-sm"><span className="font-bold text-slate-200">{channel.label}</span><span className="font-mono font-bold text-orange-300">{channel.value}%</span></div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/10"><motion.div initial={{ width: 0 }} animate={{ width: `${channel.value}%` }} transition={{ duration: 1.1, ease: 'easeOut' }} className={`bg-gradient-to-r ${channel.color} h-full rounded-full`} /></div>
                   </div>
-                  <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/10">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={{ width: `${ugcSourcePercent}%` }}
-                      transition={{ duration: 1.2, ease: "easeOut" }}
-                      className="bg-gradient-to-r from-pink-500 to-rose-500 h-full rounded-full shadow-[0_0_12px_rgba(244,63,94,0.6)]"
-                    />
-                  </div>
-                </div>
-
-                {/* Lives Source Row */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-bold text-slate-200 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-orange-400" /> Lives Comerciais
-                    </span>
-                    <span className="font-mono font-bold text-orange-300">{liveSourcePercent}%</span>
-                  </div>
-                  <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/10">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={{ width: `${liveSourcePercent}%` }}
-                      transition={{ duration: 1.2, ease: "easeOut" }}
-                      className="bg-gradient-to-r from-orange-500 to-amber-500 h-full rounded-full"
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-
             {/* ACTION BUTTONS BUTTONS */}
             <div className="flex flex-col sm:flex-row gap-5 pt-4">
-              
+
               {/* PRIMARY ACTION: GENERATE UGC (Interactive script block) */}
-              <button 
+              <button
                 onClick={() => setIsUgcOpen(true)}
-                className="flex-1 bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 text-white text-base font-bold h-16 rounded-2xl hover:opacity-95 transition-all flex items-center justify-center gap-3 shadow-[0_0_25px_rgba(244,63,94,0.35)] border border-white/20 active:scale-[0.98] group"
+                className="flex-1 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 text-white text-base font-bold h-16 rounded-2xl hover:opacity-95 transition-all flex items-center justify-center gap-3 shadow-[0_0_25px_rgba(249,115,22,0.35)] border border-white/20 active:scale-[0.98] group"
               >
                 <Sparkles className="w-5 h-5 group-hover:scale-110 transition-transform" /> Gerar Roteiros UGC (IA)
               </button>
 
               {/* SECONDARY ACTION: AFFILIATE LINK */}
-              <a 
-                href={product.affiliateLink || '#'} 
-                target="_blank" 
+              <a
+                href={product.affiliateLink || '#'}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 glass-button text-white text-base font-bold h-16 rounded-2xl transition-all flex items-center justify-center gap-3 active:scale-[0.98] group"
               >
-                <ExternalLink className="w-5 h-5 text-slate-300 group-hover:text-pink-300 transition-colors" /> Afiliar-se Agora
+                <ExternalLink className="w-5 h-5 text-slate-300 group-hover:text-orange-300 transition-colors" /> Abrir na Shopee
               </a>
             </div>
           </div>
@@ -454,35 +365,35 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
               <h2 className="text-2xl font-display font-bold text-white tracking-tight drop-shadow-sm">Criativos de Referência</h2>
               <p className="text-slate-400 text-sm font-medium">Exemplos de alta conversão para o nicho de {product.category}</p>
             </div>
-            <button className="text-sm font-bold text-pink-400 hover:text-white transition-colors flex items-center gap-2 group">
+            <button className="text-sm font-bold text-orange-400 hover:text-white transition-colors flex items-center gap-2 group">
               Biblioteca Completa <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="aspect-[9/16] glass-panel glass-panel-hover rounded-[2rem] relative group overflow-hidden cursor-pointer hover:shadow-[0_0_25px_rgba(244,63,94,0.3)] border border-white/10">
-                <img 
+              <div key={i} className="aspect-[9/16] glass-panel glass-panel-hover rounded-[2rem] relative group overflow-hidden cursor-pointer hover:shadow-[0_0_25px_rgba(249,115,22,0.3)] border border-white/10">
+                <img
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover animate-video-live opacity-90"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80" />
-                
-                <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold text-rose-300 border border-rose-500/30 flex items-center gap-1.5 shadow-md">
-                  <div className="w-1.5 h-1.5 bg-rose-500 rounded-full animate-pulse shadow-[0_0_8px_#f43f5e]" />
+
+                <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md rounded-full px-2.5 py-1 text-[9px] font-bold text-amber-300 border border-amber-500/30 flex items-center gap-1.5 shadow-md">
+                  <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse shadow-[0_0_8px_#f97316]" />
                   <span>PREVIEW DIRETO #{i}</span>
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20 overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-pink-500 to-rose-500 animate-progress-loop shadow-[0_0_8px_#f43f5e]" />
+                  <div className="h-full bg-gradient-to-r from-orange-500 to-amber-500 animate-progress-loop shadow-[0_0_8px_#f97316]" />
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 space-y-1">
                    <p className="text-xs font-bold text-white line-clamp-1 drop-shadow-md">Criativo Viral #{i}</p>
-                   <p className="text-[10px] text-pink-300 font-semibold tracking-wide flex items-center gap-1">
-                     <TrendingUp className="w-3 h-3 text-pink-400" /> Conversão Elevada
+                   <p className="text-[10px] text-orange-300 font-semibold tracking-wide flex items-center gap-1">
+                     <TrendingUp className="w-3 h-3 text-orange-400" /> Conversão Elevada
                    </p>
                 </div>
               </div>
@@ -495,18 +406,18 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
       <AnimatePresence>
         {isUgcOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            
+
             {/* Modal Glass backdrop */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsUgcOpen(false)}
               className="absolute inset-0 bg-slate-950/80 backdrop-blur-2xl"
             />
-            
+
             {/* Modal card content */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -514,20 +425,20 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
               className="glass-panel rounded-[2.5rem] w-full max-w-2xl overflow-hidden relative shadow-[0_25px_60px_rgba(0,0,0,0.8)] border border-white/20 z-10"
             >
               {/* Colored lighting accent */}
-              <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-pink-500 to-transparent shadow-[0_0_10px_rgba(244,63,94,0.8)]" />
-              
+              <div className="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent shadow-[0_0_10px_rgba(249,115,22,0.8)]" />
+
               {/* Header */}
               <div className="p-6 md:p-8 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-pink-500/20 rounded-xl flex items-center justify-center border border-pink-400/30">
-                    <Sparkles className="w-5 h-5 text-pink-300" />
+                  <div className="w-10 h-10 bg-orange-500/20 rounded-xl flex items-center justify-center border border-orange-400/30">
+                    <Sparkles className="w-5 h-5 text-orange-300" />
                   </div>
                   <div>
                     <h3 className="font-display font-bold text-lg text-white">Criador de Scripts UGC</h3>
                     <p className="text-xs text-slate-300">Roteiros virais focados em alta conversão e engajamento</p>
                   </div>
                 </div>
-                <button 
+                <button
                   onClick={() => setIsUgcOpen(false)}
                   className="w-10 h-10 rounded-full glass-button flex items-center justify-center text-slate-300 hover:text-white transition-all"
                 >
@@ -537,44 +448,44 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
 
               {/* Body */}
               <div className="p-6 md:p-8 space-y-6">
-                
+
                 {/* Script type tabs list */}
                 <div className="flex flex-wrap gap-2.5 bg-white/[0.04] backdrop-blur-xl p-1.5 rounded-xl border border-white/10">
-                  <button 
+                  <button
                     onClick={() => { setActiveTemplate('hook'); setCopied(false); }}
                     className={`flex-1 min-w-[120px] px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
-                      activeTemplate === 'hook' 
-                        ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-white/20' 
+                      activeTemplate === 'hook'
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.3)] border border-white/20'
                         : 'text-slate-300 hover:text-white'
                     }`}
                   >
                     🌟 Gancho Viral
                   </button>
-                  <button 
+                  <button
                     onClick={() => { setActiveTemplate('asmr'); setCopied(false); }}
                     className={`flex-1 min-w-[120px] px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
-                      activeTemplate === 'asmr' 
-                        ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-white/20' 
+                      activeTemplate === 'asmr'
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.3)] border border-white/20'
                         : 'text-slate-300 hover:text-white'
                     }`}
                   >
                     🤫 ASMR Estético
                   </button>
-                  <button 
+                  <button
                     onClick={() => { setActiveTemplate('pain'); setCopied(false); }}
                     className={`flex-1 min-w-[120px] px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
-                      activeTemplate === 'pain' 
-                        ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-white/20' 
+                      activeTemplate === 'pain'
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.3)] border border-white/20'
                         : 'text-slate-300 hover:text-white'
                     }`}
                   >
                     💔 Dor + Solução
                   </button>
-                  <button 
+                  <button
                     onClick={() => { setActiveTemplate('unboxing'); setCopied(false); }}
                     className={`flex-1 min-w-[120px] px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
-                      activeTemplate === 'unboxing' 
-                        ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.3)] border border-white/20' 
+                      activeTemplate === 'unboxing'
+                        ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(249,115,22,0.3)] border border-white/20'
                         : 'text-slate-300 hover:text-white'
                     }`}
                   >
@@ -584,29 +495,29 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
 
                 {/* Rendered script display */}
                 <div className="bg-white/[0.04] backdrop-blur-xl rounded-2xl border border-white/10 p-6 space-y-5 max-h-[350px] overflow-y-auto shadow-inner relative group/script">
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest bg-white/10 border border-white/10 px-3 py-1 rounded-full">ROTEIRO ATIVO</span>
-                    <span className="text-xs font-semibold text-pink-300 flex items-center gap-1.5"><Wand2 className="w-3.5 h-3.5" /> IA Otimizado</span>
+                    <span className="text-xs font-semibold text-orange-300 flex items-center gap-1.5"><Wand2 className="w-3.5 h-3.5" /> IA Otimizado</span>
                   </div>
 
                   <div className="space-y-4 text-sm leading-relaxed">
                     {/* Scene 1 */}
-                    <div className="space-y-1 border-l-2 border-pink-500/40 pl-4">
+                    <div className="space-y-1 border-l-2 border-orange-500/40 pl-4">
                       <span className="text-[10px] font-bold text-slate-400 tracking-wider block">CENA 1</span>
                       <p className="text-slate-300 text-xs italic">{script.scene1}</p>
                       <p className="text-white font-medium mt-1">"{script.audio1}"</p>
                     </div>
 
                     {/* Scene 2 */}
-                    <div className="space-y-1 border-l-2 border-pink-500/40 pl-4">
+                    <div className="space-y-1 border-l-2 border-orange-500/40 pl-4">
                       <span className="text-[10px] font-bold text-slate-400 tracking-wider block">CENA 2</span>
                       <p className="text-slate-300 text-xs italic">{script.scene2}</p>
                       <p className="text-white font-medium mt-1">"{script.audio2}"</p>
                     </div>
 
                     {/* Scene 3 */}
-                    <div className="space-y-1 border-l-2 border-pink-500/40 pl-4">
+                    <div className="space-y-1 border-l-2 border-orange-500/40 pl-4">
                       <span className="text-[10px] font-bold text-slate-400 tracking-wider block">CENA 3</span>
                       <p className="text-slate-300 text-xs italic">{script.scene3}</p>
                       <p className="text-white font-medium mt-1">"{script.audio3}"</p>
@@ -618,13 +529,13 @@ export function ProductDetailView({ product, onBack }: { product: Product, onBac
               {/* Footer */}
               <div className="p-6 md:p-8 border-t border-white/10 bg-white/[0.02] flex flex-col sm:flex-row gap-4 items-center justify-between">
                 <span className="text-xs text-slate-300 font-semibold flex items-center gap-2">
-                  <Volume2 className="w-4 h-4 text-pink-400 animate-pulse" /> Recomenda-se usar voz sintética ou natural energética.
+                  <Volume2 className="w-4 h-4 text-orange-400 animate-pulse" /> Recomenda-se usar voz sintética ou natural energética.
                 </span>
-                
+
                 <div className="flex gap-3 w-full sm:w-auto">
-                  <button 
+                  <button
                     onClick={handleCopyScript}
-                    className="flex-1 sm:flex-none bg-gradient-to-r from-pink-500 to-rose-500 hover:opacity-95 text-white font-bold px-6 h-12 rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(244,63,94,0.3)] border border-white/20"
+                    className="flex-1 sm:flex-none bg-gradient-to-r from-orange-500 to-amber-500 hover:opacity-95 text-white font-bold px-6 h-12 rounded-xl transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(249,115,22,0.3)] border border-white/20"
                   >
                     {copied ? (
                       <>

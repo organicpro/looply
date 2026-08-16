@@ -19,32 +19,18 @@ export default function App() {
   const [user, setUser] = useState(() => localStorage.getItem('looply_user_name'));
   const [activeTab, setActiveTab] = useState('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    const saved = localStorage.getItem('yviral_theme');
-    return (saved === 'light' || saved === 'dark') ? saved : 'dark';
-  });
-
   useEffect(() => {
-    localStorage.setItem('yviral_theme', theme);
-    if (theme === 'light') {
-      document.documentElement.classList.add('light');
-      document.body.classList.add('light');
-    } else {
-      document.documentElement.classList.remove('light');
-      document.body.classList.remove('light');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
+    localStorage.setItem('yviral_theme', 'dark');
+    document.documentElement.classList.remove('light');
+    document.body.classList.remove('light');
+  }, []);
 
   const renderView = () => {
     if (selectedProduct) {
       return (
-        <ProductDetailView 
-          product={selectedProduct} 
-          onBack={() => setSelectedProduct(null)} 
+        <ProductDetailView
+          product={selectedProduct}
+          onBack={() => setSelectedProduct(null)}
         />
       );
     }
@@ -76,17 +62,15 @@ export default function App() {
   if (!user) return <LoginView onLogin={(name, photo) => { localStorage.setItem('looply_user_name', name); if (photo) localStorage.setItem('looply_profile_avatar', photo); setUser(name); }} />;
 
   return (
-    <div className="looply-shell flex flex-col min-h-screen bg-background selection:bg-purple-primary/30 selection:text-white transition-colors duration-300">
-      <Sidebar 
-        activeTab={activeTab} 
+    <div className="looply-shell flex flex-col min-h-screen bg-background selection:bg-orange-primary/30 selection:text-white transition-colors duration-300">
+      <Sidebar
+        activeTab={activeTab}
         setActiveTab={(tab) => {
           setActiveTab(tab);
           setSelectedProduct(null);
-        }} 
-        theme={theme}
-        onToggleTheme={toggleTheme}
+        }}
       />
-      
+
       <main className="looply-main flex-1 relative overflow-y-auto">
         <AnimatePresence mode="wait">
           <motion.div
