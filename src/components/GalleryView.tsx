@@ -18,6 +18,13 @@ const item = {
 };
 
 const previewById: Record<string, string> = {
+  v20: '/videos/v20-air-fryer-philco.mp4',
+  v21: '/videos/v21-escova-secadora-britania.mp4',
+  v22: '/videos/v22-processador-britania.mp4',
+  v23: '/videos/v23-ventilador-mesa.mp4',
+  v24: '/videos/v24-aspirador-vertical.mp4',
+  v25: '/videos/v25-liquidificador-mondial.mp4',
+  v26: '/videos/v26-tenis-feminino.mp4',
   v11: '/videos/v11-chaleira.mp4',
   v2: '/videos/v2-facas.mp4',
   v5: '/videos/v5-panelas.mp4',

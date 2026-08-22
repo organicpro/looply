@@ -22,6 +22,10 @@ import { videos } from '../data';
 import type { Product, Video as VideoType } from '../types';
 
 const previewById: Record<string, string> = {
+  v20: '/videos/v20-air-fryer-philco.mp4', v21: '/videos/v21-escova-secadora-britania.mp4',
+  v22: '/videos/v22-processador-britania.mp4', v23: '/videos/v23-ventilador-mesa.mp4',
+  v24: '/videos/v24-aspirador-vertical.mp4', v25: '/videos/v25-liquidificador-mondial.mp4',
+  v26: '/videos/v26-tenis-feminino.mp4',
   v11: '/videos/v11-chaleira.mp4', v2: '/videos/v2-facas.mp4', v5: '/videos/v5-panelas.mp4',
   v6: '/videos/v6-parafusadeira.mp4', v10: '/videos/v10-copo-termico.mp4', v4: '/videos/v4-filtro-linha.mp4',
   v13: '/videos/v13-kit-ferramentas.mp4', v7: '/videos/v7-tiras-clareadoras.mp4', v12: '/videos/v12-massageador.mp4',
