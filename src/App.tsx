@@ -16,8 +16,15 @@ import { ProfileView } from './components/ProfileView';
 import { LiveBuilderView } from './components/LiveBuilderView';
 import { AnimatePresence, motion } from 'motion/react';
 
+const LOOPLY_ACCESS_CODE = '739284';
+
 export default function App() {
-  const [user, setUser] = useState(() => localStorage.getItem('looply_user_name'));
+  const [user, setUser] = useState(() => {
+    const hasValidCode = localStorage.getItem('looply_access_code') === LOOPLY_ACCESS_CODE
+      && localStorage.getItem('looply_access_code_validated') === 'true';
+
+    return hasValidCode ? localStorage.getItem('looply_user_name') : null;
+  });
   const [activeTab, setActiveTab] = useState('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   useEffect(() => {

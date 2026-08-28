@@ -6,27 +6,29 @@ interface LoginViewProps {
   onLogin: (name: string, photo: string) => void;
 }
 
+const LOOPLY_ACCESS_CODE = '739284';
+
 export function LoginView({ onLogin }: LoginViewProps) {
   const [name, setName] = useState('');
   const [photo, setPhoto] = useState('');
   const [accessCode, setAccessCode] = useState('');
-  const [needsAccessCode] = useState(
-    () => !localStorage.getItem('looply_access_code')
-  );
+  const [accessError, setAccessError] = useState('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const cleanName = name.trim();
-    const cleanCode = accessCode.trim();
+    const cleanCode = accessCode.trim().toUpperCase();
 
-    if (!cleanName || (needsAccessCode && !cleanCode)) return;
+    if (!cleanName || !cleanCode) return;
 
-    if (needsAccessCode) {
-      localStorage.setItem('looply_access_code', cleanCode);
-      localStorage.setItem('looply_access_code_validated', 'true');
+    if (cleanCode !== LOOPLY_ACCESS_CODE) {
+      setAccessError('Código incorreto. Digite o código de acesso correto para entrar.');
+      return;
     }
 
+    localStorage.setItem('looply_access_code', LOOPLY_ACCESS_CODE);
+    localStorage.setItem('looply_access_code_validated', 'true');
     onLogin(cleanName, photo);
   };
 
@@ -53,25 +55,31 @@ export function LoginView({ onLogin }: LoginViewProps) {
           </p>
         </div>
 
-        {needsAccessCode && (
-          <label className="access-code-field block rounded-2xl border border-orange-400/20 bg-orange-400/[0.06] p-4 text-xs font-bold text-slate-200">
-            <span className="flex items-center gap-2 text-orange-300">
-              <KeyRound className="h-4 w-4" />
-              Código de primeiro acesso
+        <label className="access-code-field block rounded-2xl border border-orange-400/20 bg-orange-400/[0.06] p-4 text-xs font-bold text-slate-200">
+          <span className="flex items-center gap-2 text-orange-300">
+            <KeyRound className="h-4 w-4" />
+            Código de acesso
+          </span>
+          <input
+            required
+            value={accessCode}
+            onChange={(event) => {
+              setAccessCode(event.target.value);
+              setAccessError('');
+            }}
+            placeholder="Digite o código para entrar"
+            autoComplete="one-time-code"
+            className="mt-3 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-slate-500"
+          />
+          <span className="mt-2 block text-[11px] font-medium text-slate-500">
+            O acesso à plataforma é liberado apenas com o código correto.
+          </span>
+          {accessError && (
+            <span className="mt-2 block text-[11px] font-bold text-orange-300">
+              {accessError}
             </span>
-            <input
-              required
-              value={accessCode}
-              onChange={(event) => setAccessCode(event.target.value)}
-              placeholder="Digite qualquer código"
-              autoComplete="one-time-code"
-              className="mt-3 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-slate-500"
-            />
-            <span className="mt-2 block text-[11px] font-medium text-slate-500">
-              Qualquer código é aceito. Ele será salvo neste navegador e solicitado somente uma vez.
-            </span>
-          </label>
-        )}
+          )}
+        </label>
 
         <label className="block text-xs font-bold text-slate-300">
           Seu nome
