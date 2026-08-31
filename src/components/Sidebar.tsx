@@ -6,11 +6,11 @@ import {
   GraduationCap,
   Search,
   Users,
-  Download,
   Radio,
   ChevronDown
 } from 'lucide-react';
 import { Logo } from './Logo';
+import { ExtensionDownloadButton } from './ExtensionDownloadButton';
 
 interface SidebarProps {
   activeTab: string;
@@ -78,11 +78,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           </kbd>
         </div>
 
-        {/* Download App button */}
-        <button className="hidden sm:flex px-4 py-1.5 bg-gradient-to-r from-orange-500/80 to-amber-500/80 hover:from-orange-500 hover:to-amber-500 text-white rounded-full text-xs font-bold items-center gap-2 transition-all shadow-[0_0_15px_rgba(249,115,22,0.3)] border border-white/20 active:scale-95">
-          <Download className="w-3.5 h-3.5" />
-          <span>Baixar Extensão</span>
-        </button>
+        <ExtensionDownloadButton variant="header" />
 
         {/* User Avatar */}
         <div className="relative group">

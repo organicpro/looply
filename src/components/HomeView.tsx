@@ -1,6 +1,7 @@
-import { Download, ExternalLink, PackageCheck, Play, Radio, Search, Video } from 'lucide-react';
+import { ExternalLink, PackageCheck, Play, Radio, Search, Video } from 'lucide-react';
 import { motion } from 'motion/react';
 import { shopeeProducts as products } from '../shopeeProducts';
+import { ExtensionDownloadButton } from './ExtensionDownloadButton';
 
 const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.06 } } };
 const item = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } };
@@ -18,7 +19,7 @@ export function HomeView({ onNavigate }: { onNavigate: (tab: string) => void }) 
             <div className="mt-7 flex flex-col sm:flex-row gap-3">
               <button onClick={() => onNavigate('live-builder')} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 px-6 py-3.5 text-sm font-black text-white shadow-[0_14px_34px_rgba(249,115,22,0.24)] transition hover:-translate-y-0.5"><Radio className="h-4 w-4" /> Montar minha live</button>
               <button onClick={() => onNavigate('radar')} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.045] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-white/[0.08]"><Search className="h-4 w-4 text-orange-400" /> Explorar produtos</button>
-              <button className="inline-flex items-center justify-center gap-2 rounded-2xl border border-orange-400/25 bg-orange-500/10 px-6 py-3.5 text-sm font-bold text-orange-200 transition hover:bg-orange-500 hover:text-white"><Download className="h-4 w-4" /> Baixar extensão</button>
+              <ExtensionDownloadButton />
             </div>
           </div>
           <div className="dashboard-product-mosaic grid grid-cols-2 gap-3">
